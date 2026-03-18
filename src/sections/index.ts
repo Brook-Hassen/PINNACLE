@@ -1,0 +1,6 @@
+export { default as BenefitsSection } from './BenefitsSection.vue'
+export { default as CapabilitiesSection } from './CapabilitiesSection.vue'
+export { default as CaseStudiesSection } from './CaseStudiesSection.vue'
+export { default as FaqSection } from './FaqSection.vue'
+export { default as HeroSection } from './HeroSection.vue'
+export { default as StatsSection } from './StatsSection.vue'
