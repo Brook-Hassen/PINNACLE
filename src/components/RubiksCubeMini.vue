@@ -12,8 +12,6 @@ interface Cubie {
 
 const wrapperRef = ref<HTMLDivElement | null>(null)
 const canvasRef = ref<HTMLCanvasElement | null>(null)
-const hintHidden = ref<boolean>(false)
-
 let renderer: THREE.WebGLRenderer | null = null
 let scene: THREE.Scene | null = null
 let camera: THREE.PerspectiveCamera | null = null
@@ -365,7 +363,6 @@ const init = (): void => {
   }
 
   clock = new THREE.Clock()
-  hintHidden.value = false
   onResize()
   animate()
 
@@ -411,12 +408,7 @@ onBeforeUnmount(dispose)
 
 <template>
   <div ref="wrapperRef" class="cube-wrap">
-    <canvas
-      ref="canvasRef"
-      class="cube-canvas"
-      @pointerdown="hintHidden = true"
-    />
-    <p class="cube-hint" :class="{ gone: hintHidden }">Drag background · orbit | Drag face · turn layer</p>
+    <canvas ref="canvasRef" class="cube-canvas" />
   </div>
 </template>
 
@@ -438,20 +430,4 @@ onBeforeUnmount(dispose)
   cursor: grabbing;
 }
 
-.cube-hint {
-  position: absolute;
-  bottom: 12px;
-  left: 50%;
-  transform: translateX(-50%);
-  color: rgba(255, 255, 255, 0.18);
-  font-size: 10px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  pointer-events: none;
-  transition: opacity 2s ease;
-}
-
-.cube-hint.gone {
-  opacity: 0;
-}
 </style>

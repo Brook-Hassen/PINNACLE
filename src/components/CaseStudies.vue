@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import SiteContainer from '@/components/SiteContainer.vue'
+
+type Pos = 'bottom-left' | 'bottom-right' | 'bottom-center'
+
 interface CaseStudy {
   id: number
   title: string
@@ -12,280 +16,147 @@ const cases: CaseStudy[] = [
 ]
 
 const getCase = (id: number): CaseStudy | undefined => cases.find((item) => item.id === id)
+
+const posClass: Record<Pos, string> = {
+  'bottom-left': 'bottom-[13px] left-[13px]',
+  'bottom-right': 'bottom-[13px] right-[13px]',
+  'bottom-center': 'bottom-[13px] left-1/2 -translate-x-1/2',
+}
 </script>
 
 <template>
-  <section id="case-studies" class="cs-section">
-    <h2 class="cs-heading">Case Studies</h2>
+  <section id="case-studies" class="bg-background py-12 font-sans sm:py-16">
+    <SiteContainer>
+      <h2 class="mb-6 text-5xl font-semibold leading-none tracking-tight text-foreground sm:text-6xl">
+        Case Studies
+      </h2>
 
-    <div class="cs-layout">
-      <div v-if="getCase(1)" class="cs-card cs-card--left">
-        <RouterLink :to="getCase(1)!.to" :aria-label="`View case study: ${getCase(1)!.title}`" class="cs-pill">
-          <span>View more</span>
-          <span class="cs-pill__circle">
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-              <path
-                d="M2 11L11 2M11 2H4M11 2V9"
-                stroke="white"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-          </span>
-        </RouterLink>
+      <div class="cs-viewport">
+        <div class="cs-scale-wrap">
+          <div class="cs-scale-inner flex items-start gap-[8px]">
+            <div
+              v-if="getCase(1)"
+              class="card relative shrink-0 cursor-pointer bg-card"
+              style="
+                width: 165px;
+                height: 360px;
+                clip-path: path('M 22,0 L 143,0 Q 165,0 165,22 L 165,338 Q 165,360 143,360 L 22,360 Q 0,360 0,338 L 0,22 Q 0,0 22,0 Z');
+              "
+            >
+              <RouterLink
+                :to="getCase(1)!.to"
+                :aria-label="`View case study: ${getCase(1)!.title}`"
+                class="vm-btn absolute inline-flex items-center gap-[6px] rounded-full border border-white/15 bg-transparent px-[12px] py-[5px] font-sans text-[10.5px] whitespace-nowrap text-white/60 transition-all duration-200"
+                :class="posClass['bottom-left']"
+              >
+                <span>View more</span>
+                <span
+                  class="flex h-[17px] w-[17px] shrink-0 items-center justify-center rounded-full border border-white/20 text-[8px] transition-colors duration-200"
+                >
+                  ↗
+                </span>
+              </RouterLink>
+            </div>
+
+            <div class="relative shrink-0" style="width: 449px; height: 360px">
+              <div
+                v-if="getCase(2)"
+                class="card absolute inset-0 cursor-pointer bg-card"
+                style="clip-path: path('M 22,0 L 427,0 Q 449,0 449,22 L 449,338 Q 449,360 427,360 L 217,360 Q 195,360 195,338 L 195,220 Q 195,200 217,200 L 22,200 Q 0,200 0,178 L 0,22 Q 0,0 22,0 Z');"
+              >
+                <RouterLink
+                  :to="getCase(2)!.to"
+                  :aria-label="`View case study: ${getCase(2)!.title}`"
+                  class="vm-btn absolute inline-flex items-center gap-[6px] rounded-full border border-white/15 bg-transparent px-[12px] py-[5px] font-sans text-[10.5px] whitespace-nowrap text-white/60 transition-all duration-200"
+                  :class="posClass['bottom-right']"
+                >
+                  <span>View more</span>
+                  <span
+                    class="flex h-[17px] w-[17px] shrink-0 items-center justify-center rounded-full border border-white/20 text-[8px] transition-colors duration-200"
+                  >
+                    ↗
+                  </span>
+                </RouterLink>
+              </div>
+
+              <div
+                v-if="getCase(3)"
+                class="card absolute cursor-pointer bg-card"
+                style="
+                  left: 8px;
+                  top: 208px;
+                  width: 179px;
+                  height: 144px;
+                  clip-path: path('M 18,0 L 161,0 Q 179,0 179,18 L 179,126 Q 179,144 161,144 L 18,144 Q 0,144 0,126 L 0,18 Q 0,0 18,0 Z');
+                "
+              >
+                <RouterLink
+                  :to="getCase(3)!.to"
+                  :aria-label="`View case study: ${getCase(3)!.title}`"
+                  class="vm-btn absolute inline-flex items-center gap-[6px] rounded-full border border-white/15 bg-transparent px-[12px] py-[5px] font-sans text-[10.5px] whitespace-nowrap text-white/60 transition-all duration-200"
+                  :class="posClass['bottom-center']"
+                >
+                  <span>View more</span>
+                  <span
+                    class="flex h-[17px] w-[17px] shrink-0 items-center justify-center rounded-full border border-white/20 text-[8px] transition-colors duration-200"
+                  >
+                    ↗
+                  </span>
+                </RouterLink>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="cs-right">
-        <div v-if="getCase(2)" class="cs-card cs-card--top">
-          <RouterLink :to="getCase(2)!.to" :aria-label="`View case study: ${getCase(2)!.title}`" class="cs-pill">
-            <span>View more</span>
-            <span class="cs-pill__circle">
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                <path
-                  d="M2 11L11 2M11 2H4M11 2V9"
-                  stroke="white"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-            </span>
-          </RouterLink>
-        </div>
-
-        <div v-if="getCase(3)" class="cs-card cs-card--overlap">
-          <RouterLink :to="getCase(3)!.to" :aria-label="`View case study: ${getCase(3)!.title}`" class="cs-pill">
-            <span>View more</span>
-            <span class="cs-pill__circle">
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                <path
-                  d="M2 11L11 2M11 2H4M11 2V9"
-                  stroke="white"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-            </span>
-          </RouterLink>
-        </div>
-      </div>
-    </div>
-
-    <p class="cs-description">
-      A collection of engineered solutions and visual identities. We partner with ambitious brands to
-      solve complex challenges through high-performance development and strategic design.
-    </p>
+      <p class="mt-6 max-w-[42rem] text-sm leading-relaxed text-muted-foreground sm:text-base">
+        A collection of engineered solutions and visual identities. We partner with ambitious brands to
+        solve complex challenges through high-performance development and strategic design.
+      </p>
+    </SiteContainer>
   </section>
 </template>
 
 <style scoped>
-.cs-section {
-  background: #0d0d0d;
-  padding: 32px 28px 24px;
-  font-family: sans-serif;
-  overflow: hidden;
+.card {
+  transition: background-color 220ms ease;
 }
 
-.cs-heading {
-  color: #fff;
-  font-size: clamp(2rem, 4.3vw, 3.35rem);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.1;
-  margin: 0 0 24px;
+.card:hover {
+  background-color: #222 !important;
 }
 
-.cs-layout {
-  display: flex;
-  align-items: flex-start;
-  gap: 14px;
-  height: 520px;
+.card:hover .vm-btn {
+  border-color: rgba(255, 255, 255, 0.35);
+  color: rgba(255, 255, 255, 0.9);
 }
 
-.cs-card--left {
-  width: 220px;
-  flex-shrink: 0;
-  height: 520px;
+.cs-viewport {
+  overflow-x: auto;
 }
 
-.cs-right {
-  flex: 1;
-  position: relative;
-  height: 520px;
+.cs-scale-wrap {
+  --cs-scale: 1;
+  width: calc(622px * var(--cs-scale));
+  min-width: calc(622px * var(--cs-scale));
+  height: calc(360px * var(--cs-scale));
 }
 
-.cs-card--top {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 300px;
-  z-index: 1;
+.cs-scale-inner {
+  width: 622px;
+  transform: scale(var(--cs-scale));
+  transform-origin: top left;
 }
 
-.cs-card--overlap {
-  position: absolute;
-  top: 220px;
-  left: 0;
-  right: 18%;
-  height: 300px;
-  z-index: 2;
-}
-
-.cs-card {
-  position: relative;
-  border-radius: 22px;
-  overflow: hidden;
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
-  padding: 18px 20px;
-  box-sizing: border-box;
-  background: #1a1a1a;
-}
-
-.cs-card:hover {
-  filter: brightness(1.08);
-}
-
-.cs-card--top     { background: #161616; }
-.cs-card--overlap { background: #1d1d1d; }
-
-.cs-pill {
-  position: relative;
-  z-index: 3;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 7px 10px 7px 16px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  color: #fff;
-  font-size: 0.76rem;
-  font-weight: 500;
-  letter-spacing: 0.015em;
-  cursor: pointer;
-  white-space: nowrap;
-  transition:
-    border-color 0.2s ease,
-    background 0.2s ease;
-}
-
-.cs-pill:hover {
-  border-color: rgba(255, 255, 255, 0.6);
-  background: rgba(255, 255, 255, 0.08);
-}
-
-.cs-pill__circle {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 26px;
-  height: 26px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 50%;
-  flex-shrink: 0;
-  transition: border-color 0.2s ease;
-}
-
-.cs-pill:hover .cs-pill__circle {
-  border-color: rgba(255, 255, 255, 0.6);
-}
-
-.cs-description {
-  margin-top: 26px;
-  color: #666;
-  font-size: 0.82rem;
-  line-height: 1.65;
-  max-width: 380px;
-}
-
-@media (max-width: 1100px) {
-  .cs-layout {
-    height: 450px;
-  }
-
-  .cs-card--left {
-    width: 180px;
-    height: 450px;
-  }
-
-  .cs-right {
-    height: 450px;
-  }
-
-  .cs-card--top {
-    height: 260px;
-  }
-
-  .cs-card--overlap {
-    top: 190px;
-    height: 260px;
-    right: 20%;
+@media (min-width: 768px) {
+  .cs-scale-wrap {
+    --cs-scale: 1.45;
   }
 }
 
-@media (max-width: 680px) {
-  .cs-section {
-    padding: 20px 16px 18px;
-  }
-
-  .cs-heading {
-    margin-bottom: 18px;
-  }
-
-  .cs-layout {
-    flex-direction: column;
-    height: auto;
-    gap: 12px;
-  }
-
-  .cs-card--left {
-    width: 100%;
-    height: 220px;
-  }
-
-  .cs-right {
-    width: 100%;
-    height: 430px;
-  }
-
-  .cs-card--top {
-    height: 235px;
-  }
-
-  .cs-card--overlap {
-    top: 185px;
-    height: 245px;
-    right: 12%;
-  }
-
-  .cs-card {
-    border-radius: 18px;
-    padding: 12px;
-  }
-
-  .cs-pill {
-    gap: 6px;
-    padding: 5px 8px 5px 10px;
-    font-size: 0.62rem;
-  }
-
-  .cs-pill__circle {
-    width: 20px;
-    height: 20px;
-  }
-
-  .cs-description {
-    margin-top: 18px;
-    max-width: 100%;
-    font-size: 0.72rem;
-    line-height: 1.45;
+@media (min-width: 1200px) {
+  .cs-scale-wrap {
+    --cs-scale: 1.65;
   }
 }
 </style>

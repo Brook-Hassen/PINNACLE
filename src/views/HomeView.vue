@@ -12,7 +12,7 @@ const FaqSection = defineAsyncComponent(() => import('@/sections/FaqSection.vue'
 </script>
 
 <template>
-  <div>
+  <div class="space-y-8 sm:space-y-10 lg:space-y-12">
     <HeroSection />
     <CapabilitiesSection :services="SERVICES" />
     <BenefitsSection :benefits="BENEFITS" />
