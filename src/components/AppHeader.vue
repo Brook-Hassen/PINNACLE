@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import logoMark from '@/assets/brand/pinnacle_logomark.svg'
+import { Button } from '@/components/ui/button'
 import { APP_NAME } from '@/constants'
 import { NAV_LINKS } from '@/constants'
 </script>
@@ -24,12 +25,14 @@ import { NAV_LINKS } from '@/constants'
           </li>
         </ul>
 
-        <RouterLink
-          to="/get-started"
-          class="rounded-full border border-border bg-card px-4 py-2 text-base font-semibold text-foreground transition hover:bg-accent"
+        <Button
+          as-child
+          class="cursor-pointer rounded-full border border-border bg-card px-5 text-base font-semibold text-foreground transition-all duration-300 hover:-translate-y-0.5 hover:border-foreground/45 hover:bg-accent hover:shadow-[0_18px_40px_-24px_rgba(255,255,255,0.55)] focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-background active:translate-y-0"
         >
-          Get Started
-        </RouterLink>
+          <RouterLink to="/get-started" class="inline-flex items-center justify-center">
+            Get Started
+          </RouterLink>
+        </Button>
       </div>
 
       <ul class="mt-4 flex gap-4 overflow-x-auto pb-1 lg:hidden">
