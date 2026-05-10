@@ -16,7 +16,7 @@ defineProps<Props>()
 </script>
 
 <template>
-  <section id="team" class="py-14 sm:py-16">
+  <section class="py-14 sm:py-16">
     <SiteContainer>
       <div class="grid gap-8 lg:grid-cols-[0.92fr_1.08fr]">
         <div class="self-end">

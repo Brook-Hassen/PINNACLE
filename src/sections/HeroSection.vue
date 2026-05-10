@@ -21,14 +21,15 @@ import { Button } from '@/components/ui/button'
             Dominance.
           </p>
           <div class="mt-8">
-            <RouterLink to="/get-started" class="inline-flex">
-              <Button
-                size="lg"
-                class="rounded-full border border-border bg-card px-8 text-base font-semibold text-foreground hover:bg-accent"
-              >
+            <Button
+              as-child
+              size="lg"
+              class="cursor-pointer rounded-full border border-border bg-card px-8 text-base font-semibold text-foreground transition-all duration-300 hover:-translate-y-0.5 hover:border-foreground/45 hover:bg-accent hover:shadow-[0_18px_40px_-24px_rgba(255,255,255,0.55)] focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-background active:translate-y-0"
+            >
+              <RouterLink to="/get-started" class="inline-flex items-center justify-center">
                 Get Started
-              </Button>
-            </RouterLink>
+              </RouterLink>
+            </Button>
           </div>
         </div>
 
