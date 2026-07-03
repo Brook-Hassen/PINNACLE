@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+  <rect width="1600" height="900" fill="#04080a"/>
+
+  <text x="100" y="50" fill="#2bbfb8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" letter-spacing="3">DISPATCH SUITE · UNIFIED</text>
+
+  <!-- Sidebar -->
+  <rect x="80" y="90" width="200" height="750" rx="14" fill="#ecf2ef" fill-opacity="0.03" stroke="#ecf2ef" stroke-opacity="0.08"/>
+  <g transform="translate(100, 120)">
+    <rect x="0" y="0" width="32" height="32" rx="8" fill="#116466"/>
+    <rect x="44" y="10" width="80" height="12" rx="3" fill="#ecf2ef" fill-opacity="0.85"/>
+    <g fill="#ecf2ef" fill-opacity="0.45">
+      <rect x="0" y="62"  width="140" height="10" rx="2"/>
+      <rect x="0" y="92"  width="120" height="10" rx="2"/>
+      <rect x="0" y="122" width="100" height="10" rx="2"/>
+      <rect x="0" y="152" width="130" height="10" rx="2"/>
+    </g>
+    <rect x="-12" y="180" width="172" height="34" rx="8" fill="rgba(43,191,184,0.12)"/>
+    <rect x="0" y="192" width="130" height="10" rx="2" fill="#2bbfb8"/>
+    <g fill="#ecf2ef" fill-opacity="0.45">
+      <rect x="0" y="242" width="110" height="10" rx="2"/>
+      <rect x="0" y="272" width="120" height="10" rx="2"/>
+      <rect x="0" y="302" width="90"  height="10" rx="2"/>
+    </g>
+  </g>
+
+  <!-- Header bar -->
+  <rect x="300" y="90" width="1220" height="60" rx="12" fill="#ecf2ef" fill-opacity="0.03" stroke="#ecf2ef" stroke-opacity="0.08"/>
+  <g transform="translate(320, 110)">
+    <rect x="0" y="6" width="220" height="14" rx="3" fill="#ecf2ef" fill-opacity="0.85"/>
+    <rect x="0" y="28" width="140" height="8" rx="2" fill="#ecf2ef" fill-opacity="0.42"/>
+  </g>
+  <g transform="translate(1180, 102)">
+    <rect x="0"   y="6" width="120" height="32" rx="16" fill="none" stroke="#ecf2ef" stroke-opacity="0.18"/>
+    <rect x="140" y="6" width="160" height="32" rx="16" fill="#116466"/>
+  </g>
+
+  <!-- 2×2 panel grid -->
+  <g transform="translate(300, 170)" fill="#ecf2ef" fill-opacity="0.03" stroke="#ecf2ef" stroke-opacity="0.08">
+    <rect x="0"   y="0"   width="600" height="320" rx="14"/>
+    <rect x="620" y="0"   width="600" height="320" rx="14"/>
+    <rect x="0"   y="340" width="600" height="330" rx="14"/>
+    <rect x="620" y="340" width="600" height="330" rx="14"/>
+  </g>
+
+  <!-- Panel 1: line chart -->
+  <g transform="translate(320, 190)">
+    <rect x="0" y="0" width="120" height="10" rx="2" fill="#ecf2ef" fill-opacity="0.85"/>
+    <rect x="0" y="18" width="80"  height="6"  rx="2" fill="#ecf2ef" fill-opacity="0.42"/>
+    <polyline points="0,260 60,200 120,220 180,160 240,180 300,120 360,140 420,90 480,110 540,70" fill="none" stroke="#2bbfb8" stroke-width="2"/>
+    <polyline points="0,260 60,200 120,220 180,160 240,180 300,120 360,140 420,90 480,110 540,70 540,280 0,280" fill="rgba(43,191,184,0.12)" stroke="none"/>
+    <g fill="#ecf2ef" fill-opacity="0.18">
+      <line x1="0" y1="280" x2="540" y2="280"/>
+      <line x1="0" y1="220" x2="540" y2="220" stroke-dasharray="2,4"/>
+      <line x1="0" y1="160" x2="540" y2="160" stroke-dasharray="2,4"/>
+      <line x1="0" y1="100" x2="540" y2="100" stroke-dasharray="2,4"/>
+    </g>
+  </g>
+
+  <!-- Panel 2: bars -->
+  <g transform="translate(940, 190)">
+    <rect x="0" y="0" width="160" height="10" rx="2" fill="#ecf2ef" fill-opacity="0.85"/>
+    <rect x="0" y="18" width="90" height="6" rx="2" fill="#ecf2ef" fill-opacity="0.42"/>
+    <g fill="#ecf2ef" fill-opacity="0.16">
+      <rect x="0"   y="100" width="40" height="180" rx="4"/>
+      <rect x="60"  y="80"  width="40" height="200" rx="4"/>
+      <rect x="120" y="140" width="40" height="140" rx="4"/>
+      <rect x="180" y="60"  width="40" height="220" rx="4"/>
+      <rect x="240" y="120" width="40" height="160" rx="4"/>
+      <rect x="300" y="40"  width="40" height="240" rx="4"/>
+      <rect x="360" y="100" width="40" height="180" rx="4"/>
+      <rect x="420" y="80"  width="40" height="200" rx="4"/>
+    </g>
+    <rect x="300" y="40" width="40" height="240" rx="4" fill="#2bbfb8" fill-opacity="0.85"/>
+  </g>
+
+  <!-- Panel 3: rows table -->
+  <g transform="translate(320, 540)">
+    <rect x="0" y="0" width="180" height="10" rx="2" fill="#ecf2ef" fill-opacity="0.85"/>
+    <g fill="#ecf2ef" fill-opacity="0.06">
+      <rect x="0" y="30"  width="560" height="34" rx="6"/>
+      <rect x="0" y="74"  width="560" height="34" rx="6"/>
+      <rect x="0" y="118" width="560" height="34" rx="6"/>
+      <rect x="0" y="162" width="560" height="34" rx="6"/>
+    </g>
+    <g fill="#ecf2ef" fill-opacity="0.5">
+      <rect x="20" y="42"  width="80" height="10" rx="2"/>
+      <rect x="20" y="86"  width="110" height="10" rx="2"/>
+      <rect x="20" y="130" width="90" height="10" rx="2"/>
+      <rect x="20" y="174" width="100" height="10" rx="2"/>
+    </g>
+    <g fill="#2bbfb8" fill-opacity="0.7">
+      <rect x="480" y="42"  width="60" height="10" rx="2"/>
+      <rect x="480" y="86"  width="40" height="10" rx="2"/>
+      <rect x="480" y="130" width="70" height="10" rx="2"/>
+      <rect x="480" y="174" width="50" height="10" rx="2"/>
+    </g>
+  </g>
+
+  <!-- Panel 4: big metric -->
+  <g transform="translate(940, 540)">
+    <rect x="0" y="0" width="180" height="10" rx="2" fill="#ecf2ef" fill-opacity="0.85"/>
+    <text x="0" y="120" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="84" font-weight="600" fill="#2bbfb8">−71%</text>
+    <text x="0" y="160" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" letter-spacing="2" fill="#ecf2ef" fill-opacity="0.55">TIME TO INTERACTIVE · MEDIAN</text>
+    <g fill="#ecf2ef" fill-opacity="0.16">
+      <rect x="0" y="200" width="560" height="6" rx="3"/>
+    </g>
+    <rect x="0" y="200" width="160" height="6" rx="3" fill="#2bbfb8"/>
+  </g>
+</svg>

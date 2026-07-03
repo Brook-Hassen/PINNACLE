@@ -4,11 +4,18 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* ════════════════════════════════════════════════════════════════
+   PINNACLE AI — DESIGN TOKENS
+   Palette anchored on #116466 (accent) and #2C3531 (surface),
+   with a noticeably darker #1A211F as the dominant page background.
+════════════════════════════════════════════════════════════════ */
+
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -30,25 +37,58 @@
 }
 
 :root {
-  --radius: 0.55rem;
-  --background: oklch(0 0 0);
-  --foreground: oklch(0.97 0 0);
-  --card: oklch(0.16 0.01 285);
-  --card-foreground: oklch(0.97 0 0);
-  --popover: oklch(0.1 0 0);
-  --popover-foreground: oklch(0.97 0 0);
-  --primary: oklch(0.18 0 0);
-  --primary-foreground: oklch(0.98 0 0);
-  --secondary: oklch(0.2 0 0);
-  --secondary-foreground: oklch(0.95 0 0);
-  --muted: oklch(0.16 0 0);
-  --muted-foreground: oklch(0.73 0 0);
-  --accent: oklch(0.16 0 0);
-  --accent-foreground: oklch(0.95 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.24 0 0);
-  --input: oklch(0.24 0 0);
-  --ring: oklch(0.85 0 0);
+  --radius: 0.85rem;
+
+  /* Shared hover/press easing so interactive elements settle consistently.
+     Scoped to CTA micro-interactions; durations are unchanged per element. */
+  --ease-out-premium: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Dominant background — a noticeably darker derivative of #2C3531 */
+  --bg-deep:           #000000;
+  --background-hex:    #04080a;
+  --surface-hex:       #131b1a;
+  --surface-2-hex:     #1f2826;
+  --surface-3-hex:     #2c3531;
+
+  /* Accent palette built around #116466 */
+  --accent-hex:        #116466;
+  --accent-light-hex:  #1a8d90;
+  --accent-soft-hex:   #2bbfb8;
+  --accent-glow-hex:   #58e0d2;
+
+  --accent-dim:        rgba(17, 100, 102, 0.12);
+  --accent-dim-2:      rgba(17, 100, 102, 0.20);
+  --accent-glow:       rgba(43, 191, 184, 0.28);
+
+  /* Text */
+  --text-hex:          #ecf2ef;
+  --text-muted-hex:    #9bb0aa;
+  --text-subtle-hex:   #6f817c;
+
+  /* Borders */
+  --border-soft:       rgba(255, 255, 255, 0.06);
+  --border-strong:     rgba(255, 255, 255, 0.12);
+  --border-accent:     rgba(17, 100, 102, 0.45);
+
+  /* Tailwind/shadcn semantic mappings (consumed by existing components) */
+  --background:           #04080a;
+  --foreground:           #ecf2ef;
+  --card:                 #131b1a;
+  --card-foreground:      #ecf2ef;
+  --popover:              #04080a;
+  --popover-foreground:   #ecf2ef;
+  --primary:              #116466;
+  --primary-foreground:   #ffffff;
+  --secondary:            #38423d;
+  --secondary-foreground: #ecf2ef;
+  --muted:                #2c3531;
+  --muted-foreground:     #9bb0aa;
+  --accent:               #134f51;
+  --accent-foreground:    #ecf2ef;
+  --destructive:          oklch(0.577 0.245 27.325);
+  --border:               rgba(255, 255, 255, 0.09);
+  --input:                rgba(255, 255, 255, 0.12);
+  --ring:                 rgba(43, 191, 184, 0.55);
 }
 
 @layer base {
@@ -56,8 +96,868 @@
     @apply border-border outline-ring/50;
   }
 
+  /* No global `scroll-behavior: smooth` here on purpose: it forced every
+     programmatic scroll (incl. reload restoration and route top-resets) to
+     animate, which read as "settling into the hero late". Smooth scrolling for
+     in-page hash/section navigation is provided explicitly by the router's
+     scrollBehavior (`behavior: 'smooth'`), which works without this rule. */
+  html {
+    scroll-behavior: auto;
+    overflow-x: clip;
+  }
+
   body {
-    @apply bg-background text-foreground antialiased;
-    font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif;
+    background: var(--background-hex);
+    color: var(--text-hex);
+    overflow-x: clip;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background: rgba(17, 100, 102, 0.38);
+    color: #ffffff;
+  }
+
+  /* Hash-targeted home sections — match the router's 88px scrollBehavior
+     offset (main.ts) for native browser anchor scrolls (e.g. initial page
+     load with #hash, or scrolling within Devtools). */
+  #home,
+  #services,
+  #work,
+  #team,
+  #faq {
+    scroll-margin-top: 5.5rem;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   TYPOGRAPHY — gradient + shimmer sweep
+══════════════════════════════════════════════════════════════ */
+
+.gradient-text {
+  background: linear-gradient(100deg, #1a8d90 0%, #2bbfb8 45%, #ecf2ef 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+.text-shimmer {
+  background: linear-gradient(
+    90deg,
+    #116466 0%,
+    #1a8d90 14%,
+    #58e0d2 28%,
+    #1a8d90 42%,
+    #116466 56%,
+    #1a8d90 70%,
+    #58e0d2 84%,
+    #116466 100%
+  );
+  background-size: 250% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer-sweep 7s linear infinite;
+}
+
+.section-tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent-soft-hex);
+}
+
+.accent-line {
+  height: 2px;
+  width: 3rem;
+  background: linear-gradient(90deg, var(--accent-light-hex), transparent);
+  border-radius: 1px;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   GLASS + BADGE + ARROW LINK
+══════════════════════════════════════════════════════════════ */
+
+.glass {
+  background: rgba(4, 8, 10, 0.85);
+  backdrop-filter: blur(22px) saturate(170%);
+  -webkit-backdrop-filter: blur(22px) saturate(170%);
+  border-color: var(--border-soft);
+}
+
+.badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);                          /* 8px */
+  padding: var(--space-2) var(--space-4);       /* 8px 16px */
+  border-radius: 9999px;
+  background: rgba(17, 100, 102, 0.13);
+  border: 1px solid rgba(43, 191, 184, 0.28);
+  color: #7fe4d8;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.glow-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-soft-hex);
+  flex-shrink: 0;
+  animation: glow-pulse 2.5s ease-in-out infinite;
+}
+
+.arrow-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--accent-soft-hex);
+  transition: gap 200ms ease, opacity 200ms ease, color 200ms ease;
+}
+
+.arrow-link:hover {
+  gap: 0.65rem;
+  color: var(--accent-glow-hex);
+}
+
+.icon-badge {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.9rem;
+  background: var(--accent-dim);
+  border: 1px solid rgba(43, 191, 184, 0.22);
+  color: var(--accent-soft-hex);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 300ms, border-color 300ms, box-shadow 300ms, color 300ms;
+}
+
+.group:hover .icon-badge,
+.spot-card:hover .icon-badge {
+  background: rgba(17, 100, 102, 0.22);
+  border-color: rgba(43, 191, 184, 0.55);
+  color: var(--accent-glow-hex);
+  box-shadow: 0 0 22px rgba(43, 191, 184, 0.22);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   SPOTLIGHT CARD — 3D hover lift
+══════════════════════════════════════════════════════════════ */
+
+.spot-card {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(19, 27, 26, 0.78), rgba(4, 8, 10, 0.95));
+  border-radius: 1.25rem;
+  border: 1px solid var(--border-soft);
+  transition:
+    transform 350ms cubic-bezier(0.22, 0.68, 0, 1.2),
+    box-shadow 350ms ease,
+    border-color 300ms ease,
+    background 300ms ease;
+  will-change: transform;
+}
+
+.spot-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--border-accent);
+  box-shadow:
+    0 0 0 1px rgba(17, 100, 102, 0.15),
+    0 24px 60px rgba(0, 0, 0, 0.55),
+    0 0 60px rgba(43, 191, 184, 0.08);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   STAT CARDS
+══════════════════════════════════════════════════════════════ */
+
+.stat-card {
+  background: rgba(19, 27, 26, 0.82);
+  border: 1px solid var(--border-soft);
+  border-radius: 1rem;
+  padding: var(--space-6) var(--space-4);  /* 24px 16px */
+  text-align: center;
+  backdrop-filter: blur(14px);
+  transition: border-color 300ms ease, box-shadow 300ms ease, transform 300ms ease;
+}
+
+.stat-card:hover {
+  border-color: var(--border-accent);
+  box-shadow: 0 0 28px rgba(43, 191, 184, 0.10);
+  transform: translateY(-2px);
+}
+
+.stat-number {
+  font-size: 2.75rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   AURORA — drifting blurred blobs + dot grid + film grain
+══════════════════════════════════════════════════════════════ */
+
+.aurora-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(110px);
+  pointer-events: none;
+  will-change: transform;
+  z-index: 0;
+}
+
+.aurora-blob--a {
+  width: 620px; height: 460px;
+  top: -22%;
+  left: calc(50% - 310px);
+  background: rgba(17, 100, 102, 0.14);
+  animation: drift-a 22s ease-in-out infinite;
+}
+
+.aurora-blob--b {
+  width: 400px; height: 400px;
+  top: 8%; right: -10%;
+  background: rgba(43, 191, 184, 0.07);
+  animation: drift-b 28s ease-in-out infinite;
+}
+
+.aurora-blob--c {
+  width: 460px; height: 280px;
+  bottom: -6%; left: -10%;
+  background: rgba(88, 224, 210, 0.04);
+  animation: drift-c 19s ease-in-out infinite;
+}
+
+.dot-grid {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(236, 242, 239, 0.07) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: radial-gradient(ellipse 70% 80% at 50% 0%, black 15%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 80% at 50% 0%, black 15%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.noise {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.section-grid-bg {
+  background-image:
+    linear-gradient(rgba(236, 242, 239, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(236, 242, 239, 0.025) 1px, transparent 1px);
+  background-size: 64px 64px;
+  background-position: center center;
+}
+
+.bottom-fade {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 9rem;
+  background: linear-gradient(to top, var(--background-hex) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   BORDER BEAM — spinning conic gradient border
+══════════════════════════════════════════════════════════════ */
+
+.beam-wrap {
+  position: relative;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  padding: 1.5px;
+  background: rgba(44, 53, 49, 0.4);
+}
+
+.beam-spin {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 170%; height: 170%;
+  transform: translate(-50%, -50%);
+  background: conic-gradient(
+    rgba(17, 100, 102, 0)    0deg,
+    rgba(17, 100, 102, 0)  250deg,
+    rgba(17, 100, 102, 0.8) 282deg,
+    rgba(43, 191, 184, 1)  307deg,
+    rgba(127, 228, 216, 0.95) 328deg,
+    rgba(17, 100, 102, 0.8) 350deg,
+    rgba(17, 100, 102, 0)  360deg
+  );
+  animation: beam-rotate 6s linear infinite;
+  pointer-events: none;
+}
+
+.beam-inner {
+  position: relative;
+  z-index: 1;
+  border-radius: calc(1.5rem - 1.5px);
+  background: var(--background-hex);
+  overflow: hidden;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   METEORS — diagonal teal streaks
+══════════════════════════════════════════════════════════════ */
+
+.meteor {
+  position: absolute;
+  width: 1px;
+  background: linear-gradient(180deg, rgba(127, 228, 216, 0.9) 0%, transparent 100%);
+  border-radius: 999px;
+  transform: rotate(215deg);
+  transform-origin: top center;
+  animation: meteor-fall linear infinite;
+  pointer-events: none;
+}
+
+.meteor::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%) translateY(-80%);
+  width: 3px; height: 3px;
+  border-radius: 50%;
+  background: rgba(127, 228, 216, 1);
+  box-shadow: 0 0 8px 3px rgba(43, 191, 184, 0.65);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   AMBIENT PARTICLES — rising teal specks
+══════════════════════════════════════════════════════════════ */
+
+@keyframes particle-rise {
+  0%   { transform: translateY(0) translateX(0); opacity: 0; }
+  8%   { opacity: 1; }
+  92%  { opacity: 0.7; }
+  100% { transform: translateY(-100vh) translateX(var(--drift, 0px)); opacity: 0; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   SCROLLBAR + DIVIDER
+══════════════════════════════════════════════════════════════ */
+
+::-webkit-scrollbar         { width: 6px; }
+::-webkit-scrollbar-track   { background: var(--bg-deep); }
+::-webkit-scrollbar-thumb   { background: var(--surface-2-hex); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent-hex); }
+
+.accent-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent-soft-hex), transparent);
+  opacity: 0.45;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   KEYFRAMES
+══════════════════════════════════════════════════════════════ */
+
+@keyframes shimmer-sweep {
+  0%   { background-position:  250% center; }
+  100% { background-position: -250% center; }
+}
+
+@keyframes drift-a {
+  0%, 100% { transform: translate(  0px,   0px) scale(1);    }
+  33%       { transform: translate( 55px, -35px) scale(1.08); }
+  66%       { transform: translate(-30px,  25px) scale(0.94); }
+}
+
+@keyframes drift-b {
+  0%, 100% { transform: translate(  0px,   0px) scale(1);    }
+  40%       { transform: translate(-55px,  32px) scale(1.12); }
+  80%       { transform: translate( 28px, -18px) scale(0.91); }
+}
+
+@keyframes drift-c {
+  0%, 100% { transform: translate(  0px,   0px) scale(1);    }
+  50%       { transform: translate( 45px, -28px) scale(1.06); }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 5px 2px rgba(43, 191, 184, 0.45); opacity: 0.7; }
+  50%       { box-shadow: 0 0 11px 4px rgba(88, 224, 210, 0.85); opacity: 1; }
+}
+
+@keyframes float-y {
+  0%, 100% { transform: translateY(  0px); }
+  50%       { transform: translateY(-10px); }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
+@keyframes slide-down {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
+@keyframes beam-rotate {
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes meteor-fall {
+  0%   { transform: rotate(215deg) translateX(0);      opacity: 0.85; }
+  65%  { opacity: 0.85; }
+  100% { transform: rotate(215deg) translateX(-750px); opacity: 0; }
+}
+
+/* ── Scroll-entrance reveal (driven by the v-reveal directive) ──────
+   Hidden state is keyed on [data-reveal], which is applied ONLY by client
+   JS, only below the fold, only when motion is allowed. So no-JS / SSG /
+   reduced-motion / already-visible content is never hidden. Transform +
+   opacity (+ optional small blur) only — no layout properties animate. */
+@media (prefers-reduced-motion: no-preference) {
+  /* Motion hierarchy: cards / metadata are the "fast layer" — a shorter, lighter
+     rise so clusters feel responsive. */
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(16px);
+    transition:
+      opacity 0.62s var(--ease-out-premium),
+      transform 0.62s var(--ease-out-premium);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+  [data-reveal].is-revealed {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Headings are the "slow layer" — longer, softer, with a touch more travel and
+     a blur-to-sharp settle, so they lead the eye and feel weightier than the
+     supporting content around them. */
+  [data-reveal-blur] {
+    transform: translateY(24px);
+    filter: blur(6px);
+    transition:
+      opacity 0.95s var(--ease-out-premium),
+      transform 0.95s var(--ease-out-premium),
+      filter 0.95s var(--ease-out-premium);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+  [data-reveal-blur].is-revealed {
+    filter: blur(0);
+  }
+}
+
+/* ── Route entrance fade (per-view, OPACITY ONLY) ───────────────────
+   Applied via a `route-fade` class on view roots. Opacity-only by design, so
+   it never changes layout, scroll position, or hash-anchor geometry — the
+   router's scroll restoration and 88px hash offset are wholly unaffected. It is
+   a CSS animation on mount (so it plays on route change), NOT a <RouterView>
+   <Transition> wrapper, so there is no mount-race with scrollBehavior. Disabled
+   under reduced motion; content is never left hidden (no animation → opacity 1). */
+@media (prefers-reduced-motion: no-preference) {
+  .route-fade {
+    animation: route-fade-in 280ms var(--ease-out-premium) both;
+  }
+}
+@keyframes route-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── Hero ambient breathing ─────────────────────────────────────────
+   A slow opacity drift on the hero's halo so the home hero feels quietly
+   alive (the home hero has no aurora layer). One element, opacity-only,
+   GPU-cheap; consistent with the existing aurora drift system; disabled
+   under reduced motion. No transform here so the halo's centering
+   translate is left untouched. */
+@keyframes hero-halo-breathe {
+  0%, 100% { opacity: 0.5; }
+  50%      { opacity: 0.72; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hero-halo-breathe {
+    animation: hero-halo-breathe 9s ease-in-out infinite;
+  }
+}
+
+/* Utility animation classes */
+.anim-fade-up    { animation: fade-up    0.7s ease-out both; }
+.anim-float      { animation: float-y    5.5s ease-in-out infinite; }
+.anim-glow-pulse { animation: glow-pulse 2.5s ease-in-out infinite; }
+.anim-slide-down { animation: slide-down 0.25s ease forwards; }
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora-blob,
+  .meteor,
+  .text-shimmer,
+  .anim-float,
+  .anim-glow-pulse,
+  .glow-dot,
+  .beam-spin {
+    animation: none !important;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   DESIGN SYSTEM — Consistency layer (additive, reversible)
+   ─────────────────────────────────────────────────────────────────
+   Everything below is opt-in via utility class. Existing inline
+   Tailwind classes still work; this layer only standardizes them
+   so the whole site reads as one design system. To roll back,
+   delete this entire block and revert section files via git.
+════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Spacing scale — STRICT. The ONLY allowed spacing values. ─
+     Any margin / padding / gap in the codebase must resolve to one
+     of these. Forbidden values: 0.5, 1.5, 2.5, 3.5, 5, 7, 9, 10, 11,
+     13, 14, 15, 17, 18, 19, 20, 22, 26, 28, 36, 44.                */
+  --space-1:  0.25rem;   /*  4px */
+  --space-2:  0.5rem;    /*  8px */
+  --space-3:  0.75rem;   /* 12px */
+  --space-4:  1rem;      /* 16px */
+  --space-6:  1.5rem;    /* 24px */
+  --space-8:  2rem;      /* 32px */
+  --space-12: 3rem;      /* 48px */
+  --space-16: 4rem;      /* 64px */
+  --space-24: 6rem;      /* 96px */
+
+  /* ── Border-radius scale ────────────────────────────────────── */
+  --radius-control: 0.625rem; /* small controls (inputs) */
+  --radius-tile:    0.9rem;   /* icon badges, small chips */
+  --radius-card:    1.25rem;  /* primary card */
+  --radius-card-lg: 1.5rem;   /* large containers, BorderBeam */
+  --radius-pill:    9999px;   /* pills and buttons */
+
+  /* ── Section rhythm — all values come from the strict scale ─── */
+  --section-pad-y:    var(--space-16);   /* mobile  py: 64px */
+  --section-pad-y-md: var(--space-24);   /* desktop py: 96px */
+  --section-gap:      var(--space-12);   /* heading → content : 48px */
+  --content-gap:      var(--space-8);    /* content blocks within a section : 32px */
+
+  /* ── Typography scale (one source of truth) ─────────────────── */
+  --font-display: clamp(3rem, 7vw, 4.5rem);          /* hero h1 */
+  --font-h2:      clamp(2.25rem, 4vw, 3.75rem);      /* section h2 */
+  --font-h3:      clamp(1.5rem, 2.4vw, 1.875rem);    /* card title */
+  --font-eyebrow: 0.7rem;                            /* section-tag */
+  --font-lead:    clamp(1rem, 1.2vw, 1.125rem);      /* section description */
+  --font-body:    1rem;                              /* body copy */
+  --font-meta:    0.875rem;                          /* small meta */
+
+  --leading-display: 1.05;   /* hero h1 — large stacked lines */
+  --leading-tight:   1.15;   /* section h2 — breathing room for descenders */
+  --leading-snug:    1.25;
+  --leading-relaxed: 1.55;
+}
+
+/* ── Section vertical rhythm ─────────────────────────────────────
+   Apply to every page section so vertical spacing is identical.
+   Drop-in replacement for `py-16 sm:py-20`.                       */
+.section-y {
+  padding-top:    var(--section-pad-y);
+  padding-bottom: var(--section-pad-y);
+}
+@media (min-width: 640px) {
+  .section-y {
+    padding-top:    var(--section-pad-y-md);
+    padding-bottom: var(--section-pad-y-md);
+  }
+}
+
+/* ── Typography utilities ──────────────────────────────────────── */
+.section-title {
+  font-size: var(--font-h2);
+  font-weight: 600;
+  line-height: var(--leading-tight);     /* 1.15 — descenders sit inside */
+  letter-spacing: -0.02em;
+  color: var(--text-hex);
+  /* Fixed-em bottom buffer so the gap to the accent line below is identical
+     whether the title is single-line / multi-line / has descenders. */
+  padding-bottom: 0.1em;
+}
+
+.section-description {
+  font-size: var(--font-lead);
+  line-height: var(--leading-relaxed);
+  color: var(--text-muted-hex);
+  max-width: 48rem;
+}
+
+.card-title {
+  font-size: var(--font-h3);
+  font-weight: 600;
+  line-height: var(--leading-snug);
+  letter-spacing: -0.01em;
+  color: var(--text-hex);
+}
+
+/* ── Buttons (centralized so all CTAs match) ───────────────────── */
+.btn-primary-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);                       /* 8px */
+  height: 2.75rem;
+  padding-inline: var(--space-6);            /* 24px */
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(43, 191, 184, 0.55);
+  background: linear-gradient(180deg, #1a8d90 0%, #116466 100%);
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  box-shadow: 0 18px 44px -18px rgba(43, 191, 184, 0.55);
+  transition:
+    transform 280ms var(--ease-out-premium),
+    box-shadow 280ms var(--ease-out-premium),
+    filter 280ms var(--ease-out-premium);
+  cursor: pointer;
+}
+.btn-primary-pill:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 22px 52px -16px rgba(43, 191, 184, 0.8);
+  filter: brightness(1.06);
+}
+.btn-primary-pill:active { transform: translateY(0) scale(0.97); }
+.btn-primary-pill:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+.btn-primary-pill:focus-visible {
+  outline: 2px solid var(--accent-glow-hex);
+  outline-offset: 3px;
+}
+
+.btn-outline-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);                       /* 8px */
+  height: 2.75rem;
+  padding-inline: var(--space-6);            /* 24px */
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-strong);
+  background: transparent;
+  color: var(--text-hex);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  transition: transform 280ms var(--ease-out-premium), border-color 280ms var(--ease-out-premium),
+    background-color 280ms var(--ease-out-premium), color 280ms var(--ease-out-premium);
+  cursor: pointer;
+}
+.btn-outline-pill:hover {
+  transform: translateY(-1px);
+  border-color: var(--border-accent);
+  background-color: var(--accent-dim);
+  color: var(--accent-glow-hex);
+}
+.btn-outline-pill:active { transform: translateY(0) scale(0.97); }
+.btn-outline-pill:focus-visible {
+  outline: 2px solid var(--accent-glow-hex);
+  outline-offset: 3px;
+}
+
+.btn-soft-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);                       /* 8px */
+  height: 2.75rem;
+  padding-inline: var(--space-6);            /* 24px */
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-soft);
+  background-color: rgba(19, 27, 26, 0.7);
+  color: var(--text-hex);
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: background-color 220ms var(--ease-out-premium),
+    border-color 220ms var(--ease-out-premium), transform 220ms var(--ease-out-premium);
+  cursor: pointer;
+}
+.btn-soft-pill:hover {
+  background-color: rgba(31, 40, 38, 0.9);
+  border-color: var(--border-strong);
+}
+.btn-soft-pill:active { transform: scale(0.97); }
+.btn-soft-pill:focus-visible {
+  outline: 2px solid var(--accent-glow-hex);
+  outline-offset: 3px;
+}
+
+/* Reduced-motion: drop ONLY the press-scale + hover sheen added for polish.
+   Existing hover/color transitions are intentionally left as-is so behavior
+   is unchanged for users who have not requested reduced motion. */
+@media (prefers-reduced-motion: reduce) {
+  .btn-primary-pill:active,
+  .btn-outline-pill:active,
+  .btn-soft-pill:active {
+    transform: none;
+  }
+  .btn-primary-pill:hover {
+    filter: none;
+  }
+}
+
+/* Larger CTA size when needed (hero / CTA section) */
+.btn-lg {
+  height: 3rem;
+  padding-inline: var(--space-8);  /* 32px */
+  font-size: 1rem;
+}
+
+/* ── Section heading vertical rhythm (used by SectionHeading.vue) ── */
+.section-heading-block { /* margin tokens for the heading→content gap */
+  --heading-gap-tag-title:   var(--space-3);   /* 12px */
+  --heading-gap-title-line:  var(--space-4);   /* 16px */
+  --heading-gap-line-desc:   var(--space-4);   /* 16px */
+  --heading-gap-bottom:      var(--section-gap);
+}
+
+/* ── Card padding token (consumed via the .card-pad utility) ───── */
+.card-pad   { padding: var(--space-6); }            /* 24px */
+@media (min-width: 640px) {
+  .card-pad { padding: var(--space-8); }            /* 32px */
+}
+
+/* ── Hero display heading ─────────────────────────────────────────
+   Single source of truth for the h1's stacked-line rhythm so the
+   gap between blocks and the gap inside wrapped lines are identical.
+   Forces every line to render at the same line-height regardless of
+   whether it's a separate <span class="block"> or a natural wrap.   */
+.hero-display {
+  line-height: var(--leading-display);    /* 1.05 across the whole h1 */
+}
+
+.hero-display__line {
+  line-height: var(--leading-display);    /* enforced per line too */
+  margin: 0;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   DESIGN POLISH V2 — additive refinement layer
+   ─────────────────────────────────────────────────────────────────
+   This block sits on top of the existing system. It is intentionally
+   reversible: remove this block and revert the Vue class swaps to restore
+   the previous implementation without touching content or component logic.
+════════════════════════════════════════════════════════════════ */
+
+:root {
+  --surface-panel: linear-gradient(180deg, rgba(19, 27, 26, 0.74), rgba(4, 8, 10, 0.92));
+  --surface-panel-raised: linear-gradient(180deg, rgba(31, 40, 38, 0.72), rgba(7, 12, 14, 0.95));
+  --surface-hairline: rgba(255, 255, 255, 0.08);
+  --surface-hairline-strong: rgba(255, 255, 255, 0.14);
+  --shadow-premium: 0 28px 80px -48px rgba(0, 0, 0, 0.95);
+  --shadow-accent-soft: 0 24px 70px -46px rgba(43, 191, 184, 0.65);
+  --motion-standard: 260ms ease;
+  --motion-expressive: 420ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.premium-panel {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--surface-hairline);
+  border-radius: var(--radius-card-lg);
+  background: var(--surface-panel);
+  box-shadow: var(--shadow-premium);
+}
+
+.premium-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.055), transparent 34%),
+    radial-gradient(circle at 18% 0%, rgba(43, 191, 184, 0.10), transparent 38%);
+  opacity: 0.8;
+}
+
+.premium-panel > * {
+  position: relative;
+  z-index: 1;
+}
+
+.premium-link-tile {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--surface-hairline);
+  border-radius: var(--radius-card-lg);
+  background: rgba(19, 27, 26, 0.52);
+  box-shadow: var(--shadow-premium);
+  transition:
+    transform var(--motion-standard),
+    border-color var(--motion-standard),
+    background var(--motion-standard),
+    box-shadow var(--motion-standard);
+}
+
+.premium-link-tile::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at var(--x, 50%) var(--y, 0%), rgba(43, 191, 184, 0.13), transparent 42%);
+  opacity: 0;
+  transition: opacity var(--motion-standard);
+}
+
+.premium-link-tile:hover {
+  transform: translateY(-2px);
+  border-color: rgba(43, 191, 184, 0.45);
+  background: rgba(31, 40, 38, 0.66);
+  box-shadow: var(--shadow-accent-soft);
+}
+
+.premium-link-tile:hover::after {
+  opacity: 1;
+}
+
+.case-section-heading {
+  max-width: 42rem;
+}
+
+.case-section-heading__kicker {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-subtle-hex);
+}
+
+.case-section-heading__title {
+  margin-top: var(--space-6);
+  max-width: 15ch;
+  color: var(--text-hex);
+  font-size: clamp(2rem, 3vw, 2.75rem);
+  font-weight: 600;
+  line-height: var(--leading-tight);
+  letter-spacing: -0.02em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .premium-link-tile {
+    transition: none !important;
+  }
+
+  .premium-link-tile:hover {
+    transform: none;
   }
 }

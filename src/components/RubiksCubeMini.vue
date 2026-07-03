@@ -21,6 +21,14 @@ let shadowMat: THREE.ShadowMaterial | null = null
 let clock: THREE.Clock | null = null
 let animationFrameId = 0
 
+// Render-loop gating: pause when the cube is fully off-screen or the tab is
+// backgrounded. WebGL rendering at 60 fps on a hidden hero is the single
+// largest avoidable cost on this page.
+let isInViewport = true
+let isTabVisible = true
+let visibilityObserver: IntersectionObserver | null = null
+const shouldRender = (): boolean => isInViewport && isTabVisible
+
 const cubies: Cubie[] = []
 let sharedBodyGeometry: THREE.BoxGeometry | null = null
 let sharedEdgeGeometry: THREE.EdgesGeometry | null = null
@@ -237,6 +245,15 @@ const animate = (): void => {
   if (!renderer || !scene || !camera || !cubeGrp || !clock) return
 
   animationFrameId = requestAnimationFrame(animate)
+
+  // When the cube is off-screen or the tab is hidden, advance the clock but
+  // skip the WebGL draw call. We still tick `getDelta()` so the cube does not
+  // visibly jump when it returns to view (the elapsed value compensates).
+  if (!shouldRender()) {
+    clock.getDelta()
+    return
+  }
+
   const dt = Math.min(clock.getDelta(), 0.05)
   const elapsed = clock.elapsedTime
 
@@ -279,7 +296,7 @@ const init = (): void => {
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5))
   renderer.shadowMap.enabled = true
   renderer.shadowMap.type = THREE.PCFSoftShadowMap
-  renderer.setClearColor(0x000000, 1)
+  renderer.setClearColor(0x000000, 0)
 
   scene = new THREE.Scene()
 
@@ -302,7 +319,7 @@ const init = (): void => {
   key.shadow.bias = -0.001
   scene.add(key)
 
-  const rim = new THREE.DirectionalLight(0x6699ff, 1.4)
+  const rim = new THREE.DirectionalLight(0x2bbfb8, 1.6)
   rim.position.set(-8, 4, -9)
   scene.add(rim)
 
@@ -332,14 +349,14 @@ const init = (): void => {
   sharedBodyGeometry = new THREE.BoxGeometry(0.94, 0.94, 0.94)
   sharedEdgeGeometry = new THREE.EdgesGeometry(new THREE.BoxGeometry(0.96, 0.96, 0.96))
   sharedBodyMaterial = new THREE.MeshStandardMaterial({
-    color: 0x080808,
-    roughness: 0.18,
-    metalness: 0.92,
+    color: 0x0d1715,
+    roughness: 0.22,
+    metalness: 0.9,
   })
   sharedEdgeMaterial = new THREE.LineBasicMaterial({
-    color: 0xbbbbbb,
+    color: 0x7fe4d8,
     transparent: true,
-    opacity: 0.5,
+    opacity: 0.42,
   })
 
   cubies.length = 0
@@ -370,6 +387,24 @@ const init = (): void => {
   window.addEventListener('pointermove', onPointerMove, { passive: true })
   window.addEventListener('pointerup', onPointerUp, { passive: true })
   window.addEventListener('resize', onResize, { passive: true })
+
+  // Tie render-loop activation to viewport intersection + tab visibility.
+  if ('IntersectionObserver' in window && wrapperRef.value) {
+    visibilityObserver = new IntersectionObserver(
+      (entries) => {
+        const last = entries[entries.length - 1]
+        if (last) isInViewport = last.isIntersecting
+      },
+      { rootMargin: '120px 0px' },
+    )
+    visibilityObserver.observe(wrapperRef.value)
+  }
+  document.addEventListener('visibilitychange', onTabVisibility)
+  isTabVisible = !document.hidden
+}
+
+const onTabVisibility = (): void => {
+  isTabVisible = !document.hidden
 }
 
 const dispose = (): void => {
@@ -381,6 +416,9 @@ const dispose = (): void => {
   window.removeEventListener('pointermove', onPointerMove)
   window.removeEventListener('pointerup', onPointerUp)
   window.removeEventListener('resize', onResize)
+  document.removeEventListener('visibilitychange', onTabVisibility)
+  visibilityObserver?.disconnect()
+  visibilityObserver = null
 
   cubies.splice(0, cubies.length)
   sharedBodyGeometry?.dispose()
@@ -407,7 +445,7 @@ onBeforeUnmount(dispose)
 </script>
 
 <template>
-  <div ref="wrapperRef" class="cube-wrap">
+  <div ref="wrapperRef" class="cube-wrap" aria-hidden="true">
     <canvas ref="canvasRef" class="cube-canvas" />
   </div>
 </template>

@@ -1,10 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PINNACLE AI</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Disable the browser's scroll restoration SYNCHRONOUSLY, before the body
+         parses or any restore can run. Doing this in a deferred module (main.ts)
+         is too late on reload: the browser restores the old scroll first, then
+         the router resets to top — producing a visible mid-page→hero jump. This
+         runs before paint so every reload renders deterministically at the top.
+         Allow-listed in the CSP via its sha256 hash (see vercel.json). -->
+    <script>if(history.scrollRestoration)history.scrollRestoration='manual'</script>
+    <meta name="theme-color" content="#04080a" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- Performance: warm up TLS to third-party origins used on common routes.
+         crossorigin is required for fetch/script origins (Plausible, Turnstile). -->
+    <link rel="preconnect" href="https://plausible.io" crossorigin />
+    <link rel="preconnect" href="https://challenges.cloudflare.com" crossorigin />
+
+    <!-- Brand typography. Production-target: self-host Inter under /fonts/ and
+         drop the Google Fonts dependency + the style-src/font-src CSP exemption.
+         Until then, Google Fonts ships Inter with font-display: swap so the page
+         renders in the fallback stack and re-paints when Inter lands. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    />
+
+    <!-- Default crawler fallback. Per-route values are set client-side via @unhead/vue. -->
+    <title>PINNACLE AI | Systems that scale. Designs that convert.</title>
+    <meta
+      name="description"
+      content="Senior creatives, engineers, and strategists on tap. Brand systems, full-stack development, and end-to-end execution, delivered in days, not quarters."
+    />
+
+    <meta property="og:site_name" content="PINNACLE AI" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="PINNACLE AI | Systems that scale. Designs that convert." />
+    <meta
+      property="og:description"
+      content="Senior creatives, engineers, and strategists on tap. Brand systems, full-stack development, end-to-end execution."
+    />
+    <meta property="og:url" content="https://pinnxai.com/" />
+    <meta property="og:image" content="https://pinnxai.com/og-default.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="PINNACLE AI" />
+    <meta
+      name="twitter:description"
+      content="Senior creatives, engineers, and strategists on tap."
+    />
+    <meta name="twitter:image" content="https://pinnxai.com/og-default.png" />
   </head>
   <body>
     <div id="app"></div>

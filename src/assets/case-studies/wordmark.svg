@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+  <rect width="1600" height="900" fill="#04080a"/>
+  <g stroke="#ecf2ef" stroke-opacity="0.05" stroke-width="1">
+    <line x1="200" y1="80" x2="200" y2="820"/>
+    <line x1="400" y1="80" x2="400" y2="820"/>
+    <line x1="600" y1="80" x2="600" y2="820"/>
+    <line x1="800" y1="80" x2="800" y2="820"/>
+    <line x1="1000" y1="80" x2="1000" y2="820"/>
+    <line x1="1200" y1="80" x2="1200" y2="820"/>
+    <line x1="1400" y1="80" x2="1400" y2="820"/>
+    <line x1="120" y1="180" x2="1480" y2="180"/>
+    <line x1="120" y1="380" x2="1480" y2="380"/>
+    <line x1="120" y1="580" x2="1480" y2="580"/>
+    <line x1="120" y1="780" x2="1480" y2="780"/>
+  </g>
+  <text x="120" y="80" fill="#2bbfb8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" letter-spacing="3">WORDMARK · M.01</text>
+  <text x="120" y="850" fill="#ecf2ef" fill-opacity="0.42" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" letter-spacing="2">CAP · 440  ·  STEM · 64  ·  ANGLE · 72°</text>
+
+  <g transform="translate(540, 230)">
+    <rect x="0" y="0" width="64" height="440" fill="#ecf2ef" fill-opacity="0.94"/>
+    <rect x="456" y="0" width="64" height="440" fill="#ecf2ef" fill-opacity="0.94"/>
+    <polygon points="64,0 132,0 280,300 224,300" fill="#ecf2ef" fill-opacity="0.94"/>
+    <polygon points="456,0 388,0 240,300 296,300" fill="#ecf2ef" fill-opacity="0.94"/>
+    <polygon points="224,300 296,300 260,440" fill="#ecf2ef" fill-opacity="0.94"/>
+  </g>
+
+  <line x1="1080" y1="850" x2="1480" y2="850" stroke="#2bbfb8" stroke-width="2"/>
+  <circle cx="1480" cy="850" r="4" fill="#2bbfb8"/>
+
+  <g transform="translate(1280, 200)" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" fill="#ecf2ef" fill-opacity="0.4" letter-spacing="2">
+    <text y="0">VARIANT A · DISPLAY</text>
+    <text y="20">VARIANT B · UI</text>
+    <text y="40">VARIANT C · FAVICON</text>
+    <text y="60">VARIANT D · MONOGRAM</text>
+  </g>
+</svg>

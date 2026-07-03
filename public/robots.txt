@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Replace the host in Sitemap with your production domain if different
+Sitemap: https://pinnxai.com/sitemap.xml

@@ -1,88 +1,81 @@
-# PINNACLE AI Website
+# PINNACLE AI
 
-Production-ready Vue 3 + TypeScript + shadcn-vue + Tailwind website implementation for PINNACLE AI.
+Marketing site for PINNACLE AI — Vue 3, TypeScript, Tailwind CSS v4, static generation via vite-ssg.
 
 ## Stack
 
 - Vue 3 + TypeScript + Vite
-- Vue Router + Pinia
-- Tailwind CSS v4 + shadcn-vue
-- ESLint + Prettier + vue-tsc
+- Vue Router (file-based routes in `src/router/routes.ts`)
+- Tailwind CSS v4 + shadcn-vue primitives
+- Formspree contact submissions
+- Deployed on Vercel
 
-## Recommended IDE Setup
+## Requirements
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+- Node.js `^20.19.0` or `>=22.12.0`
 
-## Recommended Browser Setup
-
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
-
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
+## Setup
 
 ```sh
 npm install
-```
-
-Create env file from template:
-
-```sh
 cp .env.example .env
-```
-
-Required env values:
-
-- `VITE_APP_NAME` (default: PINNACLE AI)
-- `VITE_CONTACT_API_URL` (public API endpoint for the contact form)
-- `VITE_CONTACT_API_TOKEN` (optional bearer token if your endpoint expects it)
-
-### Compile and Hot-Reload for Development
-
-```sh
 npm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
+Dev server: `http://localhost:5173`
+
+## Environment
+
+Copy `.env.example` to `.env` and set:
+
+| Variable | Purpose |
+|----------|---------|
+| `VITE_SITE_URL` | Canonical production URL (no trailing slash) |
+| `VITE_FORMSPREE_FORM_ID` | Formspree form ID for contact submissions |
+| `VITE_TURNSTILE_SITE_KEY` | Cloudflare Turnstile (optional; blank in dev) |
+| `VITE_PLAUSIBLE_DOMAIN` | Plausible analytics domain (optional) |
+| `VITE_SENTRY_DSN` | Sentry error tracking (optional) |
+
+Server-only vars (`FORMSPREE_FORM_ID`, `TURNSTILE_SECRET_KEY`) are set in Vercel project settings when using `/api/contact`.
+
+## Scripts
+
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Local development server |
+| `npm run build` | Production SSG build + type-check |
+| `npm run preview` | Preview production build |
+| `npm test` | Unit tests (Vitest) |
+| `npm run test:e2e` | End-to-end tests (Playwright) |
+| `npm run lint` | ESLint + oxlint |
+| `npm run type-check` | TypeScript validation |
+
+## Project structure
+
+```
+src/
+  components/   # Shared UI (header, footer, contact form, service blocks)
+  composables/  # Reusable Vue logic (contact form, animations)
+  constants/    # Content, nav, services, company data
+  layouts/      # App shell
+  lib/          # Utilities (navigation, analytics, contact API)
+  router/       # Route definitions
+  sections/     # Home page sections
+  views/        # Route-level pages
+  types/        # Shared TypeScript types
+api/            # Vercel serverless handlers
+public/         # Static assets, sitemap, robots.txt
+```
+
+## Deploy
+
+1. Set env vars in Vercel (see `.env.example`)
+2. Set `VITE_SITE_URL` to your production domain
+3. Update `public/sitemap.xml` and `public/robots.txt` if the domain changes from `pinnxai.com`
+4. Push to main — Vercel builds via `npm run build`
 
 ```sh
 npm run build
 ```
 
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
-
-## Deployment
-
-### Vercel
-
-- `vercel.json` is included for SPA rewrite support.
-- Set environment variables in Vercel Project Settings -> Environment Variables:
-  - `VITE_APP_NAME`
-  - `VITE_CONTACT_API_URL`
-  - `VITE_CONTACT_API_TOKEN`
-
-### Netlify
-
-- `netlify.toml` is included with build and SPA redirect rules.
-- Set the same environment variables in Netlify Site Settings -> Environment Variables.
-
-### Contact API Security Note
-
-`VITE_*` variables are exposed to the browser bundle. If your contact provider requires a private secret,
-use a server-side API route or serverless function as a secure proxy and set `VITE_CONTACT_API_URL`
-to that public proxy endpoint.
+Build output: `dist/` with prerendered HTML for home, get-started, and all service pages.

@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+  <rect width="1600" height="900" fill="#04080a"/>
+
+  <text x="100" y="50" fill="#2bbfb8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" letter-spacing="3">ATTRIBUTION · LAUNCH WEEK</text>
+
+  <!-- Top metric strip: 3 cards -->
+  <g transform="translate(80, 90)" fill="#ecf2ef" fill-opacity="0.03" stroke="#ecf2ef" stroke-opacity="0.08">
+    <rect x="0"   y="0" width="460" height="180" rx="14"/>
+    <rect x="480" y="0" width="460" height="180" rx="14"/>
+    <rect x="960" y="0" width="460" height="180" rx="14"/>
+  </g>
+  <g transform="translate(80, 90)" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">
+    <g fill="#ecf2ef" fill-opacity="0.55" font-size="11" letter-spacing="2">
+      <text x="24"   y="36">VISITS · 7 DAYS</text>
+      <text x="504"  y="36">QUALIFIED LEADS</text>
+      <text x="984"  y="36">COST PER LEAD</text>
+    </g>
+    <g font-size="64" font-weight="600">
+      <text x="24"  y="110" fill="#ecf2ef" fill-opacity="0.92">38,420</text>
+      <text x="504" y="110" fill="#2bbfb8">210</text>
+      <text x="984" y="110" fill="#ecf2ef" fill-opacity="0.92">−44%</text>
+    </g>
+    <g fill="#ecf2ef" fill-opacity="0.42" font-size="11" letter-spacing="2">
+      <text x="24"  y="150">ORG · PAID · DIRECT</text>
+      <text x="504" y="150">MQL · 90D WINDOW</text>
+      <text x="984" y="150">VS. PRE-SPRINT BENCHMARK</text>
+    </g>
+  </g>
+
+  <!-- Main line chart -->
+  <rect x="80" y="296" width="940" height="540" rx="14" fill="#ecf2ef" fill-opacity="0.03" stroke="#ecf2ef" stroke-opacity="0.08"/>
+  <g transform="translate(110, 326)">
+    <text x="0" y="0" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" letter-spacing="2" fill="#ecf2ef" fill-opacity="0.85">DAILY VISITS · LAUNCH WEEK</text>
+    <text x="0" y="22" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" letter-spacing="2" fill="#ecf2ef" fill-opacity="0.42">FRI · SAT · SUN · MON · TUE · WED · THU</text>
+
+    <!-- Grid lines -->
+    <g stroke="#ecf2ef" stroke-opacity="0.08">
+      <line x1="0" y1="120" x2="880" y2="120"/>
+      <line x1="0" y1="220" x2="880" y2="220"/>
+      <line x1="0" y1="320" x2="880" y2="320"/>
+      <line x1="0" y1="420" x2="880" y2="420"/>
+    </g>
+
+    <!-- Filled area -->
+    <polygon points="0,380 130,200 260,140 390,170 520,210 650,250 780,300 880,260 880,420 0,420" fill="rgba(43,191,184,0.14)"/>
+    <!-- Line -->
+    <polyline points="0,380 130,200 260,140 390,170 520,210 650,250 780,300 880,260" fill="none" stroke="#2bbfb8" stroke-width="2.5" stroke-linecap="round"/>
+    <!-- Dots on data points -->
+    <g fill="#04080a" stroke="#2bbfb8" stroke-width="2">
+      <circle cx="0"   cy="380" r="5"/>
+      <circle cx="130" cy="200" r="5"/>
+      <circle cx="260" cy="140" r="5"/>
+      <circle cx="390" cy="170" r="5"/>
+      <circle cx="520" cy="210" r="5"/>
+      <circle cx="650" cy="250" r="5"/>
+      <circle cx="780" cy="300" r="5"/>
+      <circle cx="880" cy="260" r="5"/>
+    </g>
+    <!-- Peak label -->
+    <g transform="translate(260, 80)">
+      <rect x="-50" y="0" width="110" height="38" rx="8" fill="#04080a" stroke="#2bbfb8" stroke-opacity="0.55"/>
+      <text x="-40" y="16" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10" letter-spacing="2" fill="#ecf2ef" fill-opacity="0.55">PEAK · MON</text>
+      <text x="-40" y="32" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#2bbfb8" font-weight="600">9,240</text>
+    </g>
+  </g>
+
+  <!-- Right side: channel breakdown -->
+  <rect x="1040" y="296" width="480" height="540" rx="14" fill="#ecf2ef" fill-opacity="0.03" stroke="#ecf2ef" stroke-opacity="0.08"/>
+  <g transform="translate(1070, 326)">
+    <text x="0" y="0" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" letter-spacing="2" fill="#ecf2ef" fill-opacity="0.85">CHANNEL · ATTRIBUTION</text>
+
+    <g transform="translate(0, 50)" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" letter-spacing="2" fill="#ecf2ef" fill-opacity="0.6">
+      <text x="0" y="0">DIRECT</text>
+      <rect x="120" y="-10" width="280" height="14" rx="3" fill="#ecf2ef" fill-opacity="0.08"/>
+      <rect x="120" y="-10" width="220" height="14" rx="3" fill="#2bbfb8" fill-opacity="0.85"/>
+      <text x="408" y="0" fill="#ecf2ef" fill-opacity="0.85">42%</text>
+    </g>
+    <g transform="translate(0, 90)" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" letter-spacing="2" fill="#ecf2ef" fill-opacity="0.6">
+      <text x="0" y="0">PAID · LI</text>
+      <rect x="120" y="-10" width="280" height="14" rx="3" fill="#ecf2ef" fill-opacity="0.08"/>
+      <rect x="120" y="-10" width="160" height="14" rx="3" fill="#2bbfb8" fill-opacity="0.7"/>
+      <text x="408" y="0" fill="#ecf2ef" fill-opacity="0.85">28%</text>
+    </g>
+    <g transform="translate(0, 130)" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" letter-spacing="2" fill="#ecf2ef" fill-opacity="0.6">
+      <text x="0" y="0">PAID · X</text>
+      <rect x="120" y="-10" width="280" height="14" rx="3" fill="#ecf2ef" fill-opacity="0.08"/>
+      <rect x="120" y="-10" width="100" height="14" rx="3" fill="#2bbfb8" fill-opacity="0.55"/>
+      <text x="408" y="0" fill="#ecf2ef" fill-opacity="0.85">18%</text>
+    </g>
+    <g transform="translate(0, 170)" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" letter-spacing="2" fill="#ecf2ef" fill-opacity="0.6">
+      <text x="0" y="0">REFERRAL</text>
+      <rect x="120" y="-10" width="280" height="14" rx="3" fill="#ecf2ef" fill-opacity="0.08"/>
+      <rect x="120" y="-10" width="60" height="14" rx="3" fill="#2bbfb8" fill-opacity="0.4"/>
+      <text x="408" y="0" fill="#ecf2ef" fill-opacity="0.85">8%</text>
+    </g>
+    <g transform="translate(0, 210)" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" letter-spacing="2" fill="#ecf2ef" fill-opacity="0.6">
+      <text x="0" y="0">SEARCH</text>
+      <rect x="120" y="-10" width="280" height="14" rx="3" fill="#ecf2ef" fill-opacity="0.08"/>
+      <rect x="120" y="-10" width="28" height="14" rx="3" fill="#2bbfb8" fill-opacity="0.3"/>
+      <text x="408" y="0" fill="#ecf2ef" fill-opacity="0.85">4%</text>
+    </g>
+
+    <line x1="0" y1="280" x2="430" y2="280" stroke="#ecf2ef" stroke-opacity="0.1"/>
+    <text x="0" y="320" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" letter-spacing="2" fill="#ecf2ef" fill-opacity="0.42">FIRST-PARTY · GA4 · CONSENT v2</text>
+
+    <g transform="translate(0, 360)">
+      <text x="0" y="0" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="58" font-weight="600" fill="#ecf2ef" fill-opacity="0.92">0.9s</text>
+      <text x="0" y="28" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" letter-spacing="2" fill="#ecf2ef" fill-opacity="0.55">MEDIAN TTI · MOBILE</text>
+    </g>
+  </g>
+</svg>

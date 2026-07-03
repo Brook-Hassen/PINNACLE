@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+  <rect width="1600" height="900" fill="#04080a"/>
+
+  <text x="100" y="80" fill="#2bbfb8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" letter-spacing="3">COMPONENT LIBRARY · 47 PATTERNS</text>
+
+  <!-- Row 1: Buttons -->
+  <text x="100" y="160" fill="#ecf2ef" fill-opacity="0.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" letter-spacing="2">BUTTONS</text>
+  <g transform="translate(100, 180)">
+    <rect x="0"   y="0" width="160" height="48" rx="24" fill="#116466"/>
+    <rect x="180" y="0" width="160" height="48" rx="24" fill="none" stroke="#2bbfb8" stroke-opacity="0.7"/>
+    <rect x="360" y="0" width="120" height="48" rx="24" fill="#ecf2ef" fill-opacity="0.06"/>
+    <rect x="500" y="0" width="100" height="48" rx="24" fill="none" stroke="#ecf2ef" stroke-opacity="0.15"/>
+  </g>
+
+  <!-- Row 2: Inputs / Form -->
+  <text x="100" y="290" fill="#ecf2ef" fill-opacity="0.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" letter-spacing="2">INPUTS</text>
+  <g transform="translate(100, 310)" stroke="#ecf2ef" stroke-opacity="0.15" fill="none">
+    <rect x="0"   y="0" width="320" height="48" rx="10"/>
+    <rect x="340" y="0" width="200" height="48" rx="10"/>
+    <rect x="560" y="0" width="120" height="48" rx="10"/>
+  </g>
+  <g transform="translate(100, 310)" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#ecf2ef" fill-opacity="0.42">
+    <text x="16"  y="30">Search…</text>
+    <text x="356" y="30">Filter</text>
+    <text x="576" y="30">Sort</text>
+  </g>
+
+  <!-- Row 3: Cards (3-col) -->
+  <text x="100" y="420" fill="#ecf2ef" fill-opacity="0.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" letter-spacing="2">CARDS</text>
+  <g transform="translate(100, 440)">
+    <g fill="#ecf2ef" fill-opacity="0.04" stroke="#ecf2ef" stroke-opacity="0.1">
+      <rect x="0"   y="0" width="440" height="200" rx="18"/>
+      <rect x="460" y="0" width="440" height="200" rx="18"/>
+      <rect x="920" y="0" width="440" height="200" rx="18"/>
+    </g>
+    <!-- card inner content marks -->
+    <g fill="#ecf2ef" fill-opacity="0.5">
+      <rect x="24"  y="28" width="160" height="10" rx="2"/>
+      <rect x="24"  y="50" width="100" height="6"  rx="2"/>
+      <rect x="484" y="28" width="180" height="10" rx="2"/>
+      <rect x="484" y="50" width="120" height="6"  rx="2"/>
+      <rect x="944" y="28" width="140" height="10" rx="2"/>
+      <rect x="944" y="50" width="90"  height="6"  rx="2"/>
+    </g>
+    <!-- card bottom rule + cta dot -->
+    <g stroke="#2bbfb8" stroke-opacity="0.5">
+      <line x1="24"  y1="170" x2="60"  y2="170"/>
+      <line x1="484" y1="170" x2="60+424" y2="170"/>
+      <line x1="484" y1="170" x2="520" y2="170"/>
+      <line x1="944" y1="170" x2="980" y2="170"/>
+    </g>
+  </g>
+
+  <!-- Row 4: Badges + chips -->
+  <text x="100" y="710" fill="#ecf2ef" fill-opacity="0.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" letter-spacing="2">CHIPS · BADGES</text>
+  <g transform="translate(100, 730)">
+    <g font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" fill="#ecf2ef" fill-opacity="0.7" letter-spacing="2">
+      <rect x="0"   y="0" width="96"  height="32" rx="16" fill="none" stroke="#ecf2ef" stroke-opacity="0.15"/>
+      <text x="16"  y="20">FIGMA</text>
+      <rect x="112" y="0" width="120" height="32" rx="16" fill="none" stroke="#ecf2ef" stroke-opacity="0.15"/>
+      <text x="128" y="20">TAILWIND</text>
+      <rect x="248" y="0" width="80"  height="32" rx="16" fill="none" stroke="#ecf2ef" stroke-opacity="0.15"/>
+      <text x="264" y="20">VUE 3</text>
+      <rect x="344" y="0" width="160" height="32" rx="16" fill="rgba(43,191,184,0.12)" stroke="#2bbfb8" stroke-opacity="0.55"/>
+      <text x="360" y="20" fill="#2bbfb8">STYLE DICTIONARY</text>
+      <rect x="520" y="0" width="96"  height="32" rx="16" fill="none" stroke="#ecf2ef" stroke-opacity="0.15"/>
+      <text x="536" y="20">SWIFT</text>
+    </g>
+  </g>
+
+  <line x1="100" y1="820" x2="1500" y2="820" stroke="#ecf2ef" stroke-opacity="0.1"/>
+  <text x="100" y="860" fill="#ecf2ef" fill-opacity="0.42" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" letter-spacing="2">STORYBOOK · CHROMATIC · VISUAL REGRESSION ON EVERY PR</text>
+</svg>

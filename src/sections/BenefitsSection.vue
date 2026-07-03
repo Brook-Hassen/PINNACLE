@@ -2,6 +2,9 @@
 import { computed, onBeforeUnmount, onMounted, ref, type Component } from 'vue'
 import { Blocks, BriefcaseBusiness, Rocket, Sparkles, Users, Workflow } from 'lucide-vue-next'
 import SiteContainer from '@/components/SiteContainer.vue'
+import SectionHeading from '@/components/SectionHeading.vue'
+import SpotlightCard from '@/components/ui/SpotlightCard.vue'
+import IconBadge from '@/components/ui/IconBadge.vue'
 import type { BenefitItem } from '@/types'
 
 interface Props {
@@ -49,14 +52,12 @@ const stopAnimation = () => {
 
 const animateOffset = () => {
   const delta = targetOffset.value - currentOffset.value
-
   if (Math.abs(delta) < 0.35) {
     currentOffset.value = targetOffset.value
     applyOffset()
     frameId = null
     return
   }
-
   currentOffset.value += delta * 0.12
   applyOffset()
   frameId = requestAnimationFrame(animateOffset)
@@ -70,9 +71,7 @@ const queueAnimation = () => {
 
 const syncInteractivity = () => {
   const prefersReducedMotion = motionQuery?.matches ?? false
-
   isInteractive.value = !prefersReducedMotion && window.innerWidth >= 1024 && maxOffset.value > 0
-
   if (!isInteractive.value) {
     stopAnimation()
     currentOffset.value = 0
@@ -84,9 +83,7 @@ const syncInteractivity = () => {
 const measureTrack = () => {
   const viewport = viewportRef.value
   const track = trackRef.value
-
   if (!viewport || !track) return
-
   maxOffset.value = Math.max(track.scrollWidth - viewport.clientWidth, 0)
   currentOffset.value = Math.min(currentOffset.value, maxOffset.value)
   targetOffset.value = Math.min(targetOffset.value, maxOffset.value)
@@ -96,28 +93,23 @@ const measureTrack = () => {
 
 const handleRevealMove = (event: MouseEvent) => {
   const viewport = viewportRef.value
-
   if (!viewport || !isInteractive.value || maxOffset.value <= 0) return
-
   const bounds = viewport.getBoundingClientRect()
   const pointerProgress = (event.clientX - bounds.left) / bounds.width
   const clampedProgress = Math.min(Math.max(pointerProgress, 0), 1)
   const revealProgress = Math.pow(clampedProgress, 0.9)
-
   targetOffset.value = maxOffset.value * revealProgress
   queueAnimation()
 }
 
 const primeReveal = () => {
   if (!isInteractive.value || maxOffset.value <= 0) return
-
   targetOffset.value = Math.max(targetOffset.value, maxOffset.value * 0.08)
   queueAnimation()
 }
 
 const resetReveal = () => {
   if (!isInteractive.value) return
-
   targetOffset.value = 0
   queueAnimation()
 }
@@ -128,17 +120,13 @@ const handleEnvironmentChange = () => {
 
 onMounted(() => {
   motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
-
   resizeObserver = new ResizeObserver(() => {
     measureTrack()
   })
-
   if (viewportRef.value) resizeObserver.observe(viewportRef.value)
   if (trackRef.value) resizeObserver.observe(trackRef.value)
-
   window.addEventListener('resize', handleEnvironmentChange)
   motionQuery.addEventListener('change', handleEnvironmentChange)
-
   measureTrack()
 })
 
@@ -151,43 +139,44 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <section id="work" class="py-12 sm:py-16">
+  <section id="work" class="section-y relative overflow-hidden">
     <SiteContainer>
-      <p class="max-w-4xl text-3xl font-medium leading-tight text-foreground sm:text-5xl">
-        Frustrated with finding the perfect digital designer hire?
-      </p>
-      <p class="mt-3 max-w-4xl text-lg leading-snug text-muted-foreground sm:text-2xl">
-        PINNACLE AI offers fast, reliable and superior design by senior creatives on tap immediately.
-      </p>
+      <SectionHeading
+        tag="Why teams pick us"
+        title="Tired of stitching"
+        highlight=" freelancers together?"
+        description="One brief, one team. Senior people on the work from day one, with replies measured in hours, not ticket queues."
+      />
 
+      <!-- Reveal the viewport as ONE block (no per-card reveal): these cards
+           live in a horizontal scroller, so cards laid out beyond the viewport
+           width would never intersect and a per-card observer would strand them
+           hidden. Container-level reveal is safe and keeps all cards visible. -->
       <div
         ref="viewportRef"
-        class="work-viewport mt-8 pb-2"
+        v-reveal
+        class="work-viewport mt-16 pb-2"
         :class="{ 'work-viewport--interactive': isInteractive }"
         @mouseenter="primeReveal"
         @mousemove="handleRevealMove"
         @mouseleave="resetReveal"
       >
         <div ref="trackRef" class="work-track">
-          <article
+          <SpotlightCard
             v-for="benefit in benefitsWithIcons"
             :key="benefit.id"
-            class="work-card group rounded-3xl border border-border/80 bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:border-foreground/20 hover:bg-card/90 sm:p-7"
+            class="work-card card-pad"
           >
-            <div
-              class="flex h-14 w-14 items-center justify-center rounded-full border border-border/80 bg-background/70 text-foreground transition-colors duration-300 group-hover:border-foreground/30 group-hover:text-white"
-            >
+            <IconBadge>
               <component :is="benefit.icon" class="h-5 w-5" aria-hidden="true" />
-            </div>
-            <h3
-              class="mt-6 min-h-[4.1rem] max-w-[15ch] text-2xl font-semibold leading-[1.08] text-card-foreground lg:text-[2rem]"
-            >
+            </IconBadge>
+            <h3 class="card-title mt-6 min-h-[3.6rem] max-w-[15ch]">
               {{ benefit.title }}
             </h3>
             <p class="mt-3 max-w-[25ch] text-sm leading-relaxed text-muted-foreground lg:text-base">
               {{ benefit.description }}
             </p>
-          </article>
+          </SpotlightCard>
         </div>
       </div>
     </SiteContainer>
@@ -197,11 +186,32 @@ onBeforeUnmount(() => {
 <style scoped>
 .work-viewport {
   --work-offset: 0px;
+  --edge-fade: clamp(2.5rem, 6vw, 5rem);
   overflow-x: auto;
   overflow-y: visible;
   padding-inline: 0.125rem;
   scrollbar-width: none;
   touch-action: pan-x;
+}
+
+/* Soft fade only in desktop interactive mode (the track is transform-driven
+   and clipped). In the mobile scroll mode the mask was fading the first +
+   last card even when fully visible, which read as "broken" — see Overall-Report §5. */
+.work-viewport--interactive {
+  mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 var(--edge-fade),
+    #000 calc(100% - var(--edge-fade)),
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 var(--edge-fade),
+    #000 calc(100% - var(--edge-fade)),
+    transparent 100%
+  );
 }
 
 .work-viewport::-webkit-scrollbar {
@@ -220,8 +230,7 @@ onBeforeUnmount(() => {
   flex: 0 0 min(78vw, 18rem);
   display: flex;
   flex-direction: column;
-  min-height: 14.75rem;
-  box-shadow: 0 24px 44px -34px rgba(0, 0, 0, 0.9);
+  min-height: 15rem;
 }
 
 @media (min-width: 768px) {
@@ -250,7 +259,7 @@ onBeforeUnmount(() => {
 
   .work-card {
     flex-basis: clamp(19rem, 21vw, 20.5rem);
-    min-height: 15rem;
+    min-height: 15.25rem;
   }
 }
 </style>
