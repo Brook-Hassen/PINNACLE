@@ -17,10 +17,14 @@ const RubiksCubeMini = defineAsyncComponent(() => import('@/components/RubiksCub
     id="home"
     class="relative flex min-h-[100svh] items-center overflow-hidden pt-[var(--section-pad-y)] sm:pt-[var(--section-pad-y-md)]"
   >
-    <!-- Subtle dot grid + noise only; no aurora blobs on the hero so the teal
-         glow stays concentrated around the cube. -->
-    <div class="dot-grid pointer-events-none absolute inset-0 opacity-60" aria-hidden="true" />
-    <div class="noise pointer-events-none absolute inset-0" aria-hidden="true" />
+    <!-- Textured field — mesh, hatch, perspective grid + grain only. -->
+    <div class="hero-field pointer-events-none absolute inset-0" aria-hidden="true">
+      <div class="hero-field__depth" />
+      <div class="hero-field__mesh" />
+      <div class="hero-field__hatch" />
+      <div class="hero-field__plane" />
+    </div>
+    <div class="noise noise--hero pointer-events-none absolute inset-0" aria-hidden="true" />
 
     <SiteContainer class="relative z-10">
       <div class="grid items-center gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16">
