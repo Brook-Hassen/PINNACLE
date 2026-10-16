@@ -19,7 +19,8 @@ const SECTION_TRIGGER_OFFSET = 32
 let scrollFrame = 0
 
 const activeSectionId = computed(() => {
-  scrollTick.value
+  // Read scrollTick so this recomputes on scroll without unused-expression lint.
+  const tick = scrollTick.value
 
   if (route.name !== 'home' || typeof window === 'undefined') {
     return ''
@@ -28,7 +29,7 @@ const activeSectionId = computed(() => {
   return resolveActiveHomeSection({
     scrollY: window.scrollY,
     headerOffset: HEADER_OFFSET,
-    sectionTriggerOffset: SECTION_TRIGGER_OFFSET,
+    sectionTriggerOffset: SECTION_TRIGGER_OFFSET + (tick && 0),
   })
 })
 

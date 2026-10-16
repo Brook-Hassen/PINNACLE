@@ -1,6 +1,5 @@
 import type { ServicePage } from '@/types'
 import type { ServiceSlug } from './serviceSlugs'
-import { SERVICE_SLUGS } from './serviceSlugs'
 
 export const SERVICE_PAGES: readonly ServicePage[] = [
   {
