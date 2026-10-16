@@ -29,12 +29,12 @@ defineProps<Props>()
           v-for="(item, i) in stats"
           :key="item.id"
           v-reveal="{ delay: i * 80 }"
-          class="text-center"
+          class="stat-card text-center"
         >
-          <p class="text-6xl font-light leading-none sm:text-7xl">
+          <p class="font-display text-5xl font-semibold leading-none tracking-tight sm:text-6xl">
             <AnimatedNumber :value="item.value" class="text-shimmer" />
           </p>
-          <p class="mt-3 text-base uppercase tracking-[0.16em] text-muted-foreground sm:text-lg">
+          <p class="mt-4 font-mono text-[0.6875rem] font-semibold uppercase tracking-[0.18em] text-muted-foreground sm:text-xs">
             {{ item.label }}
           </p>
         </article>

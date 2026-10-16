@@ -28,8 +28,14 @@ useHead({
           The page you requested does not exist, or it has moved. Head back home or send us a note.
         </p>
         <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
-          <RouterLink to="/" class="btn-primary-pill">Return Home</RouterLink>
-          <RouterLink to="/get-started" class="btn-outline-pill">Contact Us</RouterLink>
+          <RouterLink to="/" class="btn-primary-pill group">
+            Return Home
+            <span aria-hidden="true" class="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
+          </RouterLink>
+          <RouterLink to="/get-started" class="btn-outline-pill group">
+            Contact Us
+            <span aria-hidden="true" class="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
+          </RouterLink>
         </div>
       </div>
     </SiteContainer>

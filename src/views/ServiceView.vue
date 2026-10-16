@@ -172,7 +172,10 @@ useHead({
     <SiteContainer class="text-center">
       <h1 class="section-title">Service not found</h1>
       <p class="section-description mx-auto mt-4">That service page is not on our site.</p>
-      <RouterLink :to="homeSectionTarget('services')" class="btn-primary-pill mt-8">Back to services</RouterLink>
+      <RouterLink :to="homeSectionTarget('services')" class="btn-primary-pill group mt-8">
+        Back to services
+        <span aria-hidden="true" class="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
+      </RouterLink>
     </SiteContainer>
   </section>
 </template>

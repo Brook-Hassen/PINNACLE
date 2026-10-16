@@ -20,15 +20,14 @@
     <link rel="preconnect" href="https://plausible.io" crossorigin />
     <link rel="preconnect" href="https://challenges.cloudflare.com" crossorigin />
 
-    <!-- Brand typography. Production-target: self-host Inter under /fonts/ and
-         drop the Google Fonts dependency + the style-src/font-src CSP exemption.
-         Until then, Google Fonts ships Inter with font-display: swap so the page
-         renders in the fallback stack and re-paints when Inter lands. -->
+    <!-- Brand typography: Space Grotesk (display) + Inter (body) +
+         Newsreader (editorial leads) + JetBrains Mono (meta/tags).
+         font-display: swap keeps first paint on the fallback stack. -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=Space+Grotesk:wght@500;600;700&display=swap"
     />
 
     <!-- Default crawler fallback. Per-route values are set client-side via @unhead/vue. -->
