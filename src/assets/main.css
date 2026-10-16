@@ -240,27 +240,18 @@
 .arrow-link {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  gap: 0.45rem;
-  height: 2.25rem;
-  padding-inline: 1rem;
-  border-radius: 9999px;
-  border: 1px solid var(--border-strong);
-  background: var(--surface-hex);
-  font-family: var(--font-family-sans);
-  font-size: 0.8125rem;
-  font-weight: 500;
-  color: var(--text-hex);
-  transition:
-    border-color 200ms ease,
-    color 200ms ease,
-    box-shadow 280ms ease;
+  gap: 0.4rem;
+  font-family: var(--font-family-display);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--accent-soft-hex);
+  transition: gap 200ms ease, color 200ms ease;
 }
 
 .group:hover .arrow-link,
 .arrow-link:hover {
-  border-color: color-mix(in srgb, var(--accent-soft-hex) 50%, transparent);
-  color: var(--accent-soft-hex);
+  gap: 0.65rem;
+  color: var(--accent-glow-hex);
 }
 
 .icon-badge {
@@ -1223,7 +1214,7 @@
   max-width: 42rem;
   color: var(--text-hex);
   font-family: var(--font-family-display);
-  font-size: clamp(1.75rem, 6vw, 3.5rem);
+  font-size: clamp(2rem, 8vw, 3.5rem);
   font-weight: 700;
   line-height: 1.05;
   letter-spacing: -0.04em;
@@ -1238,10 +1229,10 @@
 }
 
 .offer-grid {
-  /* AfterQuery / WorksVia: keep 2-col on phone — no single-column card stack */
+  /* Future Quest mobile: single column — readable cards, not cramped 2-up */
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.65rem;
+  grid-template-columns: 1fr;
+  gap: 1rem;
 }
 
 .offer-card {
@@ -1249,12 +1240,12 @@
   min-height: 0;
   overflow: hidden;
   border: 1px solid rgba(232, 240, 237, 0.1);
-  border-radius: 1rem;
+  border-radius: 1.25rem;
   background:
     radial-gradient(520px circle at 30% 26%, rgba(var(--accent-rgb), 0.08), transparent 62%),
     rgba(10, 18, 16, 0.88);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
-  padding: 0.95rem;
+  padding: 1.35rem 1.4rem;
   color: inherit;
   transition:
     border-color 280ms var(--ease-out-premium),
@@ -1271,7 +1262,6 @@
 }
 
 .offer-card--feature {
-  grid-column: 1 / -1;
   min-height: 0;
   display: flex;
   flex-direction: column;
@@ -1310,18 +1300,18 @@
 .offer-icon {
   display: grid;
   place-items: center;
-  width: 2.25rem;
-  height: 2.25rem;
-  margin-bottom: 0.65rem;
-  border-radius: 0.6rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-bottom: 0.85rem;
+  border-radius: 0.7rem;
   border: 1px solid rgba(var(--accent-rgb), 0.42);
   color: var(--accent-soft-hex);
   background: rgba(var(--accent-rgb), 0.13);
 }
 
 .offer-icon svg {
-  width: 1rem;
-  height: 1rem;
+  width: 1.15rem;
+  height: 1.15rem;
 }
 
 .offer-kicker {
@@ -1334,18 +1324,18 @@
 }
 
 .offer-card h3 {
-  margin-top: 0.35rem;
+  margin-top: 0.55rem;
   color: var(--text-hex);
   font-family: var(--font-family-display);
-  font-size: 0.95rem;
+  font-size: 1.25rem;
   font-weight: 700;
-  line-height: 1.2;
+  line-height: 1.15;
   letter-spacing: -0.03em;
 }
 
 .offer-card--feature h3 {
-  margin-top: 0.45rem;
-  font-size: clamp(1.25rem, 4.5vw, 2.1rem);
+  margin-top: 0.65rem;
+  font-size: clamp(1.45rem, 5.5vw, 2.1rem);
 }
 
 .offer-card h3 span {
@@ -1353,25 +1343,24 @@
 }
 
 .offer-card__copy {
-  margin-top: 0.4rem;
+  margin-top: 0.5rem;
   max-width: 36rem;
   color: rgba(232, 240, 237, 0.64);
-  font-size: 0.75rem;
-  line-height: 1.45;
+  font-size: 0.875rem;
+  line-height: 1.55;
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
 .offer-card--feature .offer-card__copy {
-  -webkit-line-clamp: 3;
-  font-size: 0.8125rem;
+  -webkit-line-clamp: 5;
 }
 
 .offer-feature__bottom {
   margin-top: auto;
-  padding-top: 0.85rem;
+  padding-top: 1.25rem;
 }
 
 .offer-primary-link {
@@ -1379,32 +1368,18 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  min-width: 0;
-  height: 2.25rem;
-  padding-inline: 1.1rem;
+  min-width: 9.5rem;
+  height: 2.75rem;
+  padding-inline: 1.5rem;
   border-radius: 9999px;
   border: 0;
   background: linear-gradient(135deg, var(--accent-from), var(--accent-to));
   color: #ffffff;
   font-family: var(--font-family-sans);
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
   font-weight: 500;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.18);
   transition: box-shadow 280ms ease;
-}
-
-/* Mobile 2-col denser chrome */
-.offer-card--small .arrow-link,
-.offer-card--side .arrow-link {
-  height: 1.85rem;
-  padding-inline: 0.75rem;
-  font-size: 0.6875rem;
-}
-
-.offer-card--side .offer-tags,
-.offer-card--side .offer-divider,
-.offer-card--side .offer-kicker {
-  display: none;
 }
 
 .offer-card:hover .offer-primary-link {
@@ -1450,18 +1425,22 @@
   gap: 0.75rem;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 768px) {
   .offer-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0.8rem;
   }
 
   .offer-card {
-    border-radius: 1.25rem;
-    padding: 1.35rem;
     min-height: 13rem;
+    padding: 1.35rem;
   }
 
-  .offer-card--feature,
+  .offer-card--feature {
+    grid-column: 1 / -1;
+    min-height: 18rem;
+  }
+
   .offer-card--side {
     min-height: 18rem;
   }
@@ -1478,59 +1457,12 @@
     height: 1.25rem;
   }
 
-  .offer-card h3 {
-    margin-top: 0.55rem;
-    font-size: 1.25rem;
-  }
-
   .offer-card--feature h3 {
-    margin-top: 0.65rem;
     font-size: clamp(1.55rem, 2.2vw, 2.1rem);
   }
 
   .offer-card__copy {
     margin-top: 0.65rem;
-    font-size: 0.875rem;
-    line-height: 1.5;
-    -webkit-line-clamp: 4;
-  }
-
-  .offer-card--feature .offer-card__copy {
-    -webkit-line-clamp: 5;
-    font-size: 0.875rem;
-  }
-
-  .offer-feature__bottom {
-    padding-top: 1.25rem;
-  }
-
-  .offer-card--side .offer-divider,
-  .offer-card--side .offer-kicker {
-    display: block;
-  }
-
-  .offer-card--side .offer-tags {
-    display: flex;
-  }
-
-  .offer-card--small .arrow-link,
-  .offer-card--side .arrow-link {
-    height: 2.25rem;
-    padding-inline: 1rem;
-    font-size: 0.8125rem;
-  }
-
-  .offer-primary-link {
-    min-width: 9.5rem;
-    height: 2.75rem;
-    padding-inline: 1.5rem;
-    font-size: 0.875rem;
-  }
-}
-
-@media (min-width: 768px) {
-  .offer-card--feature {
-    grid-column: 1 / -1;
   }
 }
 

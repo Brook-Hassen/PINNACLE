@@ -27,19 +27,22 @@ const RubiksCubeMini = defineAsyncComponent(() => import('@/components/RubiksCub
     <div class="dot-grid opacity-60" aria-hidden="true" />
     <div class="noise noise--hero pointer-events-none absolute inset-0" aria-hidden="true" />
 
-    <SiteContainer class="relative z-10 w-full py-12 sm:py-16 lg:py-20">
-      <!-- WorksVia mobile: left-aligned copy + side-by-side CTAs; cube sits beside on sm+ -->
-      <div class="grid items-center gap-8 sm:gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:gap-12 xl:gap-16">
-        <div class="hero-copy relative w-full max-w-2xl text-left lg:max-w-none">
+    <SiteContainer class="relative z-10 w-full py-10 sm:py-16 lg:py-20">
+      <!--
+        Mobile = Dream/FQ: centered copy, stacked full-width CTAs, compact cube below.
+        Desktop = two-col with cube beside copy.
+      -->
+      <div class="grid items-center gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-12 xl:gap-16">
+        <div class="hero-copy relative mx-auto w-full max-w-lg text-center lg:mx-0 lg:max-w-none lg:text-left">
           <p
-            class="anim-fade-up font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-[var(--accent-soft-hex)]"
+            class="anim-fade-up font-mono text-[10px] font-semibold uppercase tracking-[0.28em] text-[var(--accent-soft-hex)] sm:text-[11px] sm:tracking-[0.22em]"
             style="animation-delay: 0s"
           >
             {{ APP_NAME }}
           </p>
 
           <h1
-            class="hero-display anim-fade-up mt-4 text-balance text-[length:var(--font-display)] text-foreground sm:mt-5"
+            class="hero-display anim-fade-up mt-4 text-balance text-[1.85rem] leading-[1.08] tracking-tight text-foreground sm:mt-5 sm:text-[length:var(--font-display)]"
             style="animation-delay: 0.08s"
           >
             <span class="hero-display__line block">Systems That Scale.</span>
@@ -47,7 +50,7 @@ const RubiksCubeMini = defineAsyncComponent(() => import('@/components/RubiksCub
           </h1>
 
           <p
-            class="anim-fade-up mt-5 max-w-[36rem] text-[0.9375rem] leading-6 text-muted-foreground sm:mt-6 sm:text-[1.075rem] sm:leading-7"
+            class="anim-fade-up mx-auto mt-4 max-w-[34rem] text-[15px] leading-relaxed text-muted-foreground sm:mt-6 sm:text-[1.075rem] sm:leading-7 lg:mx-0"
             style="animation-delay: 0.16s"
           >
             Stop settling for fragmented tools. We provide an integrated suite of development,
@@ -56,14 +59,14 @@ const RubiksCubeMini = defineAsyncComponent(() => import('@/components/RubiksCub
           </p>
 
           <div
-            class="anim-fade-up mt-7 flex flex-row flex-wrap items-center gap-2.5 sm:mt-9 sm:gap-3"
+            class="anim-fade-up mt-6 flex w-full flex-col gap-3 sm:mt-9 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center lg:justify-start"
             style="animation-delay: 0.24s"
           >
-            <RouterLink to="/get-started" class="btn-primary-pill btn-lg group flex-1 sm:flex-none">
+            <RouterLink to="/get-started" class="btn-primary-pill btn-lg group w-full sm:w-auto">
               Get Started
               <ArrowRight class="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </RouterLink>
-            <RouterLink to="/#services" class="btn-outline-pill btn-lg group flex-1 sm:flex-none">
+            <RouterLink to="/#services" class="btn-outline-pill btn-lg group w-full sm:w-auto">
               Explore services
               <span aria-hidden="true" class="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
             </RouterLink>
@@ -71,11 +74,11 @@ const RubiksCubeMini = defineAsyncComponent(() => import('@/components/RubiksCub
         </div>
 
         <div
-          class="anim-fade-up relative mx-auto h-[220px] w-full max-w-[280px] sm:h-[300px] sm:max-w-[360px] lg:mx-0 lg:h-[440px] lg:max-w-[560px]"
+          class="anim-fade-up relative mx-auto mt-2 h-[150px] w-full max-w-[180px] sm:mt-0 sm:h-[260px] sm:max-w-[320px] lg:mx-0 lg:h-[440px] lg:max-w-[560px]"
           style="animation-delay: 0.25s"
         >
           <div
-            class="hero-halo-breathe pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[160px] w-[180px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-60 sm:h-[200px] sm:w-[220px] lg:h-[240px] lg:w-[260px]"
+            class="hero-halo-breathe pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[140px] w-[150px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-60 sm:h-[200px] sm:w-[220px] lg:h-[240px] lg:w-[260px]"
             style="
               background: radial-gradient(
                 ellipse 50% 50% at 50% 50%,

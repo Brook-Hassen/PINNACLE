@@ -47,10 +47,12 @@ const benefitsWithIcons = computed(() =>
           <div class="benefit-card__icon" aria-hidden="true">
             <component :is="benefit.icon" class="h-4 w-4 sm:h-5 sm:w-5" />
           </div>
-          <h3 class="benefit-card__title">{{ benefit.title }}</h3>
-          <p class="benefit-card__copy">
-            {{ benefit.description }}
-          </p>
+          <div class="benefit-card__body">
+            <h3 class="benefit-card__title">{{ benefit.title }}</h3>
+            <p class="benefit-card__copy">
+              {{ benefit.description }}
+            </p>
+          </div>
         </article>
       </div>
     </SiteContainer>
@@ -59,14 +61,15 @@ const benefitsWithIcons = computed(() =>
 
 <style scoped>
 .benefit-grid {
-  /* WorksVia why__grid: keep 2×2 on phone */
   display: grid;
-  gap: 0.65rem;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  /* Mobile: single column — Dream/FQ breathing room, not cramped 2-up */
+  grid-template-columns: 1fr;
 }
 
 @media (min-width: 640px) {
   .benefit-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0.9rem;
   }
 }
@@ -96,13 +99,18 @@ const benefitsWithIcons = computed(() =>
 .benefit-card {
   position: relative;
   overflow: hidden;
-  border-radius: 0.9rem;
+  display: grid;
+  /* WorksVia mobile row: icon beside copy */
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.9rem;
+  align-items: start;
+  border-radius: 1rem;
   border: 1px solid rgba(232, 240, 237, 0.1);
   background:
     radial-gradient(420px circle at 12% 0%, rgba(43, 191, 184, 0.1), transparent 55%),
     linear-gradient(165deg, rgba(23, 35, 32, 0.95), rgba(10, 18, 16, 0.98));
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
-  padding: 0.95rem;
+  padding: 1.15rem 1.2rem;
   transition:
     border-color 280ms var(--ease-out-premium),
     transform 280ms var(--ease-out-premium),
@@ -111,6 +119,7 @@ const benefitsWithIcons = computed(() =>
 
 @media (min-width: 640px) {
   .benefit-card {
+    display: block;
     border-radius: 1.1rem;
     padding: 1.35rem 1.35rem 1.5rem;
   }
@@ -142,9 +151,9 @@ const benefitsWithIcons = computed(() =>
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 2.15rem;
-  height: 2.15rem;
-  border-radius: 0.65rem;
+  width: 2.35rem;
+  height: 2.35rem;
+  border-radius: 0.7rem;
   border: 1px solid rgba(43, 191, 184, 0.32);
   background: rgba(17, 100, 102, 0.16);
   color: var(--accent-soft-hex);
@@ -164,24 +173,20 @@ const benefitsWithIcons = computed(() =>
 }
 
 .benefit-card__title {
-  margin-top: 0.75rem;
+  margin: 0;
   font-family: var(--font-family-display);
-  font-size: 0.875rem;
+  font-size: 1rem;
   font-weight: 600;
-  line-height: 1.25;
+  line-height: 1.3;
   letter-spacing: -0.02em;
   color: var(--text-hex);
 }
 
 .benefit-card__copy {
-  margin-top: 0.4rem;
-  font-size: 0.7rem;
-  line-height: 1.45;
+  margin: 0.35rem 0 0;
+  font-size: 0.8125rem;
+  line-height: 1.5;
   color: var(--text-muted-hex);
-  display: -webkit-box;
-  -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 }
 
 @media (min-width: 640px) {
@@ -195,8 +200,6 @@ const benefitsWithIcons = computed(() =>
     margin-top: 0.75rem;
     font-size: 0.95rem;
     line-height: 1.55;
-    -webkit-line-clamp: unset;
-    display: block;
   }
 }
 
